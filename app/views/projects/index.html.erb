@@ -1,6 +1,16 @@
 <h1>Listing projects</h1>
 
-<table>
+<% @projects.each do |project| %>
+    <article class="col-md-4">
+        <div class="image">
+            <%= link_to raw("<img src='#{project.photo}' width='200' height='135'>"), project %>
+        </div>
+        <%= link_to raw("<h1>#{project.name}</h1>"), project %>
+        <p>by <%= project.author %></p>
+        <p><%= project.description %></p>
+    </article>
+<% end %>
+<!-- <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -19,7 +29,9 @@
       <tr>
         <td><%= project.name %></td>
         <td><%= project.description %></td>
-        <td><%= project.photo %></td>
+        <td>
+          <img src="<%= project.photo %>" width="200" height="135">
+        </td>
         <td><%= project.tags %></td>
         <td><%= project.author %></td>
         <td><%= project.collaborators %></td>
@@ -30,8 +42,6 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
 
 <br>
-
-<%= link_to 'New Project', new_project_path %>
