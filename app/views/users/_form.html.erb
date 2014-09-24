@@ -11,16 +11,20 @@
     </div>
   <% end %>
 
-  <div class="user_field">
+  <div class="user_field form-group">
     <%= f.text_field :email, :placeholder => @user.email %>
     <span class="edit">edit</span>
     <div class="edit_underline"></div>
-    
-
+  </div>
+  
+  <div class="user_field form-group">
+    <%= f.text_field :email, :placeholder => @user.email %>
+    <span class="edit">edit</span>
+    <div class="edit_underline"></div>
   </div>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit({:class => 'btn btn-primary'}) %>
   </div>
   
 <% end %>
