@@ -1,1 +1,5 @@
-<%= @user.email %>
+<% if current_user.id == @user.id %>
+	<%= render 'form' %>
+<% else %>
+	<%= @user.email %>
+<% end %>
