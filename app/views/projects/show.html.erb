@@ -1,8 +1,14 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? && @project.user_id == current_user.id %>
+	Tu peux l'éditer négro !
+<% end %>
+
+<h1 class="page-header">
+  <%= @project.name %>
+</h1>
 
 <p>
-  <strong>Name:</strong>
-  <%= @project.name %>
+  <strong>Auteur du projet : </strong>
+  <%= @project.user.email %>
 </p>
 
 <p>
@@ -21,11 +27,6 @@
 </p>
 
 <p>
-  <strong>Author:</strong>
-  <%= @project.author %>
-</p>
-
-<p>
   <strong>Collaborators:</strong>
   <%= @project.collaborators %>
 </p>
@@ -34,6 +35,5 @@
   <strong>Followers:</strong>
   <%= @project.followers %>
 </p>
-
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

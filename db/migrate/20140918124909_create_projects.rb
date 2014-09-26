@@ -8,7 +8,6 @@ class CreateProjects < ActiveRecord::Migration
       t.string :author
       t.string :collaborators
       t.string :followers
-
       t.timestamps
     end
   end

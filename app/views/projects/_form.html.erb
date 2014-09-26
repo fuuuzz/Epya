@@ -1,4 +1,4 @@
-<%= form_for(@project,  html: { method: :put }) do |f| %>
+<%= form_for(@project) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -28,16 +28,8 @@
     <%= f.text_field :tags %>
   </div>
   <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_field :author %>
-  </div>
-  <div class="field">
     <%= f.label :collaborators %><br>
-    <%= f.text_field :collaborators %>
-  </div>
-  <div class="field">
-    <%= f.label :followers %><br>
-    <%= f.text_field :followers %>
+    <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }) %>
   </div>
   <div class="actions">
     <%= f.submit %>
