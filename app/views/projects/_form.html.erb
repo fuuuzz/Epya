@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label :collaborators %><br>
-    <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }) %>
+    <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "") %>
   </div>
   <div class="actions">
     <%= f.submit %>
