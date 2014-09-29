@@ -11,6 +11,7 @@ class TagsController < ApplicationController
   # GET /tags/1
   # GET /tags/1.json
   def show
+
   end
 
   # GET /tags/new
@@ -28,11 +29,18 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
-    @tags.user = current_user
+    @user_tags = UserTags.new
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.json { render :show, status: :created, location: @tag }
+        @user_tags.user = current_user
+        @user_tags.tag = @tag
+        if @user_tags.save
+          format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+          format.json { render :show, status: :created, location: @tag }
+          else
+          format.html { render :new }
+          format.json { render json: @tag.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new }
         format.json { render json: @tag.errors, status: :unprocessable_entity }
