@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @users    = User.all
   end
 
   # POST /projects

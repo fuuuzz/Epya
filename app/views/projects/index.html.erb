@@ -3,7 +3,7 @@
 <% @projects.each do |project| %>
     <article class="col-md-4">
         <div class="image">
-            <%= link_to raw("<img src='#{project.photo}' width='200' height='135'>"), project %>
+            <%= link_to raw("<img src='/assets/projects/#{project.photo}'>"), project %>
         </div>
         <%= link_to raw("<h1>#{project.name}</h1>"), project %>
         <p>by <%= project.author %></p>
