@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :projects, dependent: :destroy
-  has_and_belongs_to_many :projects
+  has_many :projects
+  has_many :followers
+  has_many :project, :through => :follower
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

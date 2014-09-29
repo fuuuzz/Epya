@@ -4,9 +4,6 @@ development:
   pool: 5
   timeout: 5000
   port: 5432
-  host: localhost
-  username: rails
-  password: mypass
 
 test:
   adapter: postgresql
@@ -14,9 +11,6 @@ test:
   pool: 5
   timeout: 5000
   port: 5432
-  host: localhost
-  username: rails
-  password: mypass
 
 production:
   adapter: postgresql
