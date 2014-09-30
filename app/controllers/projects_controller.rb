@@ -28,10 +28,11 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+   @users    = User.all
    @project = Project.new(project_params)
    # Set User's project
    @project.user = current_user
-                                                                                                                                                                                                   
+   @project.author = @project.user.email                                                                                                                                                                                               
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -78,13 +79,17 @@ class ProjectsController < ApplicationController
    @follower.user = current_user
    @follower.project = @project
    
-   respond_to do |format|
+   if @follower.valid?
      
-     if @follower.save
-       format.html { redirect_to @project, notice: 'You follow this project' }
-       format.json { head :no_content }
+     respond_to do |format|
+       if @follower.save
+         format.html { redirect_to @project, notice: 'You follow this project' }
+         format.json { head :no_content }
+       end
      end
      
+   else
+     redirect_to @project, notice: 'You follow this project'
    end
    
   end
