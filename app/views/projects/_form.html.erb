@@ -12,23 +12,23 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name %>
+    <%= f.label :name, 'Nom' %>
     <%= f.text_field :name, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :description %>
+    <%= f.label :description, 'Description' %>
     <%= f.text_area :description, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :photo %>
+    <%= f.label :photo, 'Illustration' %>
     <%= f.text_field :photo, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :tags %>
+    <%= f.label :tags, 'Les tags définissant le projet' %>
     <%= f.text_field :tags, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :collaborators %>
+    <%= f.label :collaborators, 'Les collaborateurs au projet' %>
     <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "", :class => 'form-control') %>
   </div>
   <div class="actions">
