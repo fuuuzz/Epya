@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
    @users    = User.all
-   @project = Project.new(project_params)
+   @project  = Project.new(project_params)
    # Set User's project
    @project.user = current_user
    @project.author = @project.user.email                                                                                                                                                                                               
@@ -79,7 +79,7 @@ class ProjectsController < ApplicationController
    @follower.user = current_user
    @follower.project = @project
    
-   if @follower.valid?
+   if @follower.valid? && @follower.user.email != @project.author
      
      respond_to do |format|
        if @follower.save
@@ -89,7 +89,7 @@ class ProjectsController < ApplicationController
      end
      
    else
-     redirect_to @project, notice: 'You follow this project'
+     redirect_to @project, notice: 'Sorry but, you already follow this project, or you are the author for this project !'
    end
    
   end
