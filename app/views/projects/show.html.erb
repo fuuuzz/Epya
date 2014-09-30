@@ -29,13 +29,24 @@
 
 <p>
   <strong>Followers:</strong>
-  <%= @project.followers %>
+  <ul>
+  <% @followers.each do |f| %>
+  	<li>
+  		<%= f.email %>
+  	</li>
+  <% end %>
+  <ul>
 </p>
 
 <% if user_signed_in? %>
 	
-	<% link_to 'S\'abonner', follow_path(@project), :class=>("btn btn-primary") %>
-	
+	<% if @followers.include?(current_user) %>
+		<p>
+			Vous suivez ce projet !
+		</p>
+	<% else %>
+		<%= link_to 'S\'abonner', follow_path(@project), :class=>("btn btn-primary") %>
+	<% end %>
 	<% if @project.user_id == current_user.id %>
   		<%= link_to 'Edit', edit_project_path(@project), :class=>("btn btn-primary") %>
   	<% end %>

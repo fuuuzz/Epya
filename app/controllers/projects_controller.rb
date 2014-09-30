@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
+  before_action :getFollowers, only: [:show]
 
   # GET /projects
   # GET /projects.json
@@ -28,7 +29,9 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
    @project = Project.new(project_params)
-   @project.user = current_user                                                                                                                                                                                                                         
+   # Set User's project
+   @project.user = current_user
+                                                                                                                                                                                                   
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -63,11 +66,43 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # GET /project/1/follow
+  # Save current user as follower for the project id that passed in url params
+  def follow
+    
+   @follower = Follower.new
+   
+   @project = Project.find(params[:id])
+   
+   @follower.user = current_user
+   @follower.project = @project
+   
+   respond_to do |format|
+     
+     if @follower.save
+       format.html { redirect_to @project, notice: 'You follow this project' }
+       format.json { head :no_content }
+     end
+     
+   end
+   
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+    end
+    
+    # Get users who follow the project id that passed in request param
+    def getFollowers
+      @followers_project = Follower.where(project_id: params[:id])
+      @followers = Array.new
+      @followers_project.each do |f|
+        user = User.find(f.user_id)
+        @followers.push user
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

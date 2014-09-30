@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :projects
   has_many :followers
-  has_many :project, :through => :follower
+  has_many :projects, :through => :follower
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

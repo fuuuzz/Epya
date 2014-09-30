@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, :for %>
+    <%= f.text_field :name, :class => 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, :class => 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :photo %><br>
-    <%= f.text_field :photo %>
+  <div class="form-group">
+    <%= f.label :photo %>
+    <%= f.text_field :photo, :class => 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :tags %><br>
-    <%= f.text_field :tags %>
+  <div class="form-group">
+    <%= f.label :tags %>
+    <%= f.text_field :tags, :class => 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :collaborators %><br>
-    <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "") %>
+  <div class="form-group">
+    <%= f.label :collaborators %>
+    <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "", :class => 'form-control') %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Modifier', :class => 'btn btn-primary' %>
   </div>
 <% end %>

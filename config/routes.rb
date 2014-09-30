@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources  :users
   
   #SPECIFIQUES
-  get 'project/:id/follow' => 'project#follow', as: :follow
+  get 'project/:id/follow' => 'projects#follow', as: :follow
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
