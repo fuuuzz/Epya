@@ -32,7 +32,7 @@
   <ul>
   <% @followers.each do |f| %>
   	<li>
-  		<%= f.email %>
+  		<%= link_to(f.name, user_path(f)) %>
   	</li>
   <% end %>
   <ul>
