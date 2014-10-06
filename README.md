@@ -1,8 +1,5 @@
 #Epya 
 
-*Even your mom likes it*
-
-
 A Rails project wich is gonna do some stuff. Pretty good stuff.
 
 
