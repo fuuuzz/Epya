@@ -8,7 +8,7 @@
 			<% end %>
         </div>
         <%= link_to raw("<h1>#{project.name}</h1>"), project %>
-        <p>by <%= project.author %></p>
+        <p>by <%= link_to(project.author.name, user_path(project.user)) %></p>
         <p><%= project.description[0,200] %>&nbsp;[...]</p>
         <%= link_to raw("<span class=\"read-more\">Voir le projet</span>"), project, :class => 'btn btn-primary' %>
     </article>
