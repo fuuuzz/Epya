@@ -18,3 +18,8 @@ test:
 
 production:
   adapter: postgresql
+  database: epya_production
+  pool: 5
+  timeout: 5000
+  user: dnoamqaeacfpcn
+  password: 93RASI2OIrX2Ylb7XZXaBkxDLh
