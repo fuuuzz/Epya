@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
    @project  = Project.new(project_params)
    # Set User's project
    @project.user = current_user
-   @project.author = @project.user                                                                                                                                                                                     
+   @project.author = @project.user.name                                                                                                                                                                                     
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
