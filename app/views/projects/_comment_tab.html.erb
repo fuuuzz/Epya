@@ -1,0 +1,29 @@
+<h1 class="page-header">Commentaires</h1>
+<div id="comments">
+<% @comments.each do |comment| %>
+	  	<div class="panel panel-default">
+		  <div class="panel-body">
+		    <%= raw(comment.content.gsub("\n", "<br />\n")) %>
+		  </div>
+		  <div class="panel-footer">Commentaire par : <%= link_to(comment.user.name, user_path(comment.user)) %></div>
+		</div>
+<% end %>
+</div>
+	<h2 class="page-header">Votre avis</h2>
+	<% if user_signed_in? %>
+		<%= form_for(@comment, :remote => true) do |f| %>
+			<div class="form-group">
+				<%= f.label :content %>
+				<%= f.text_area :content, :class => "form-control" %>
+			</div>
+			<%= hidden_field_tag 'project_id', @project.id %>
+			<%= f.submit "Ajouter", :class => "btn btn-primary" %>
+		<% end %>
+	<% else %>
+		<p>
+			<%= link_to('Inscription', new_user_registration_path, :class => "btn btn-success")%>
+		</p>
+		<p>
+			<%= link_to('Connexion', user_session_path, :class => "btn btn-default")%>
+		</p>
+	<% end %>

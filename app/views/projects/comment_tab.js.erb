@@ -1,0 +1,1 @@
+$( "#ajaxContent" ).hide().html( "<%= escape_javascript( render( :partial => "comment_tab", :locals => { :comments => @comments, :project => @project, :comment => @comment} ) ) %>" ).fadeIn("slow");
