@@ -34,7 +34,7 @@
 	  <%= @project.collaborators %>
 	</p>
 	
-	<p>
+	<p id="followers">
 	  <strong>Followers:</strong>
 	  <ul>
 	  <% @followers.each do |f| %>
@@ -48,7 +48,7 @@
 	<% if user_signed_in? %>
 		
 		<% if @followers.include?(current_user) || @project.user == current_user %>
-			<!-- Can't follow this project while we already follow this project or we are the project author -->
+			<%= link_to 'Se desabonner', :url => {:controller => 'projects', :action => 'unfollow'}, :remote => true, :class=>("btn btn-primary") %>
 		<% else %>
 			<%= link_to 'S\'abonner', follow_path(@project), :class=>("btn btn-primary") %>
 		<% end %>
