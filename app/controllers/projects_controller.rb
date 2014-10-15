@@ -25,9 +25,9 @@ class ProjectsController < ApplicationController
      end
   end
   # GET-AJAX /projects/1
-  def actu_tab
+  def new_tab
     @project = Project.find(params[:id])
-    @new = New.new
+    @new = New.new()
     @news = New.where(project_id: params[:id])
     respond_to do | format |  
         format.js

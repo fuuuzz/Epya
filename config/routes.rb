@@ -7,16 +7,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources  :projects do
     member do
-      get 'actu_tab'
+      get 'new_tab'
       get 'comment_tab'
       get 'show_tab'
     end
   end
   resources  :users
   resources  :comments
-  resources :projects do
-     resources :comments
-   end
+  resources  :news
   
   #SPECIFIQUES
   get 'projects/:id/follow' => 'projects#follow', as: :follow

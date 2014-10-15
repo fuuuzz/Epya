@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :projects
   has_many :comments
+  has_many :news
   
   has_many :followers
   validates_associated :followers

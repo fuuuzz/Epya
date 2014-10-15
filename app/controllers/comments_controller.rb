@@ -11,13 +11,13 @@ class CommentsController < ApplicationController
   
   # POST-AJAX /projects/:id --> Project#comment_tab
   def create
-  @comment = Comment.new(comment_params)
-  @comment.user = current_user
-  @comment.project_id = params[:project_id]
-  respond_to do |format|
-    if @comment.save
-      format.js
-    end
+    @comment = Comment.new(comment_params)
+    @comment.user = current_user
+    @comment.project_id = params[:project_id]
+    respond_to do |format|
+      if @comment.save
+        format.js
+      end
     end
   end
 

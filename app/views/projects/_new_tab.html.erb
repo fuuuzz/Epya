@@ -1,0 +1,34 @@
+<h1 class="page-header">Actualités du projet</h1>
+<div id="news">
+<% @news.each do |n| %>
+	  	<div class="panel panel-default">
+		  <div class="panel-heading"><h3 class="panel-title"><%= n.title %></h3></div>
+		  <div class="panel-body">
+		    <%= raw(n.content.gsub("\n", "<br />\n")) %>
+		  </div>
+		  <div class="panel-footer">Actualité par : <%= link_to(n.user.name, user_path(n.user)) %></div>
+		</div>
+<% end %>
+</div>
+	<h2 class="page-header">Ajoute une actualité à ton projet</h2>
+	<% if user_signed_in? %>
+		<%= form_for(@new, :url => {:controller => 'news', :action => "create"}, :remote => true) do |f| %>
+			<div class="form-group">
+				<%= f.label :title %>
+				<%= f.text_field :title, :class => "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :content %>
+				<%= f.text_area :content, :class => "form-control" %>
+			</div>
+			<%= hidden_field_tag 'project_id', @project.id %>
+			<%= f.submit "Ajouter", :class => "btn btn-primary" %>
+		<% end %>
+	<% else %>
+		<p>
+			<%= link_to('Inscription', new_user_registration_path, :class => "btn btn-success")%>
+		</p>
+		<p>
+			<%= link_to('Connexion', user_session_path, :class => "btn btn-default")%>
+		</p>
+	<% end %>
