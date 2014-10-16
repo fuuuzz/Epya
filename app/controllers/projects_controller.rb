@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
-  before_action :getFollowers, only: [:show, :show_tab]
+  before_action :getFollowers, only: [:show, :show_project_tab]
 
   # GET /projects
   # GET /projects.json
@@ -18,14 +18,14 @@ class ProjectsController < ApplicationController
   # TAB Project#show
   #
   # GET-AJAX /projects/1
-  def show_tab
+  def show_project_tab
      @project = Project.find(params[:id])
      respond_to do |format|
        format.js
      end
   end
   # GET-AJAX /projects/1
-  def new_tab
+  def news_tab
     @project = Project.find(params[:id])
     @new = New.new()
     @news = New.where(project_id: params[:id])
