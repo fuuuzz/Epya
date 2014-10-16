@@ -1,0 +1,7 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><h3 class="panel-title"><%= new.title %></h3></div>
+  <div class="panel-body">
+    <%= raw(new.content.gsub("\n", "<br />\n")) %>
+  </div>
+  <div class="panel-footer">Actualité par : <%= link_to(new.user.name, user_path(new.user)) %></div>
+</div>

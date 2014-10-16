@@ -1,1 +1,5 @@
-<%= render 'form' %>
+<% if current_user.id == @user.id %>
+	<%= render 'form' %>
+<% else %>
+	<p id="notice"><%= notice %></p>
+<% end %>

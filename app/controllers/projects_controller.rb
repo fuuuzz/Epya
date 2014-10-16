@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
+  before_action :getFollowers, only: [:show, :show_project_tab]
 
 
   # GET /projects
@@ -20,6 +21,35 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
   end
+  
+  #
+  # TAB Project#show
+  #
+  # GET-AJAX /projects/1
+  def show_project_tab
+     @project = Project.find(params[:id])
+     respond_to do |format|
+       format.js
+     end
+  end
+  # GET-AJAX /projects/1
+  def news_tab
+    @project = Project.find(params[:id])
+    @new = New.new()
+    @news = New.where(project_id: params[:id])
+    respond_to do | format |  
+        format.js
+    end
+  end
+  # GET-AJAX /projects/1
+  def comment_tab
+    @project = Project.find(params[:id])
+    @comment = Comment.new
+    @comments = Comment.where(project_id: params[:id])
+    respond_to do | format |  
+        format.js
+    end
+  end
 
   # GET /projects/new
   def new
@@ -37,6 +67,11 @@ class ProjectsController < ApplicationController
   def create
    @project = Project.new(project_params)
    @project.user = current_user                                                                                                                                                                                                       
+   @users    = User.all
+   @project  = Project.new(project_params)
+   # Set project author
+   @project.user = current_user
+   @project.author = @project.user.name                                                                                                                                                                                     
     respond_to do |format|
       if @project.save
         params[:tag].each do |tag|
@@ -80,11 +115,54 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # GET-AJAX /project/1/follow
+  # Save current user as follower for the project id that passed in url params
+  def follow
+    
+   @follower = Follower.new
+   
+   @project = Project.find(params[:id])
+   
+   @follower.user = current_user
+   @follower.project = @project
+   
+   if @follower.valid? && @project.user.id != current_user.id
+     @follower.save
+     getFollowers
+     set_project
+     respond_to do |format|
+       format.js
+     end
+   end
+   
+  end
+
+  # GET-AJAX
+  def unfollow
+    @follower = Follower.find_by(project_id: params[:id], user_id: current_user.id)
+    @follower.destroy
+    getFollowers
+    set_project
+    respond_to do |format|
+      format.js
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+    end
+    
+    # Get users who follow the project id that passed in request param
+    def getFollowers
+      @followers_project = Follower.where(project_id: params[:id])
+      @followers = Array.new
+      @followers_project.each do |f|
+        user = User.find(f.user_id)
+        @followers.push user
+      end
     end
 
     def project_params

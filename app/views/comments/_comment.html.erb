@@ -1,0 +1,6 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= raw(comment.content.gsub("\n", "<br />\n")) %>
+  </div>
+  <div class="panel-footer">Commentaire par : <%= link_to(comment.user.name, user_path(comment.user)) %></div>
+</div>

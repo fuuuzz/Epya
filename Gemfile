@@ -6,6 +6,7 @@ gem 'rails', '4.1.6'
 gem 'pg'
 gem 'rails_12factor'
 gem 'devise'
+gem 'tinymce-rails'
 # Use SCSS for stylesheets
 gem 'compass-rails'
 gem 'sass-rails', '~> 4.0.3'

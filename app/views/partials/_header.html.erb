@@ -40,10 +40,10 @@
       	  <li>
             <%= link_to 'New Project', new_project_path %>
           </li>
-		  <li>
-		  	<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
-		  </li>
-		  <li><%= link_to(current_user.email, user_path(:id => current_user.id)) %></li> 
+		  <li><%= link_to(current_user.name, user_path(:id => current_user.id)) %></li> 
+      <li>
+        <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+      </li>
 		<% else %>
 			<li>
 				<%= link_to('Login', user_session_path)  %>
