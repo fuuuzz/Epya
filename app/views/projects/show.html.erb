@@ -44,13 +44,15 @@
 		  	</li>
 		  <% end %>
 		  <ul>
-		  	<% if user_signed_in? && @project.author != current_user %>
-				<% if @followers.include?(current_user) %>
-					<%= link_to 'Se désabonner', :action => 'unfollow', :remote => true %>
-				<% elsif  @project.user != current_user  %>
-					<%= link_to 'S\'abonner', :action => 'follow', :remote => true %>
+		  	<p>
+				<% if user_signed_in? && @project.author != current_user %>
+					<% if @followers.include?(current_user) %>
+						<%= link_to('Se désabonner', {:action => 'unfollow', :remote => true}, {:class => 'btn btn-primary'}) %>
+					<% elsif  @project.user != current_user  %>
+						<%= link_to('S\'abonner', {:action => 'follow', :remote => true}, {:class => 'btn btn-primary'}) %>
+					<% end %>
 				<% end %>
-			<% end %>
+			</p>
 		</div>
 	</p>
 	
