@@ -2,10 +2,18 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
 
+
   # GET /projects
   # GET /projects.json
   def index
     @projects = Project.all
+    # @projects.each do |project|
+    #   project.tags = Array.new
+    #   @project_tag = new
+    #   @tag = 
+    #   @tag
+    #   project.tags.push
+    # end
   end
 
   # GET /projects/1
@@ -28,11 +36,20 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
    @project = Project.new(project_params)
-   @project.user = current_user                                                                                                                                                                                                                         
+   @project.user = current_user                                                                                                                                                                                                       
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
+        params[:tag].each do |tag|
+          @tag = Tag.new
+          @tag.name = tag
+          @tag.save
+          @project_tags = ProjectTag.new
+          @project_tags.project_id = @project.id
+          @project_tags.tag_id = @tag.id
+          @project_tags.save
+        end     
+          format.html { redirect_to @project, notice: 'Project was successfully created.' }
+          format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -70,8 +87,8 @@ class ProjectsController < ApplicationController
       @project = Project.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :photo, :tags, :author, :collaborators, :followers)
+      params.require(:project).permit(:name, :description, :photo, :tag => [])
     end
+
 end
