@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
+
   # HOMEPAGE
-  root 'projects#index'
+  root 'welcome#hello'
 
   # RESSOURCES
   devise_for :users
