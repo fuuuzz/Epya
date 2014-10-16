@@ -21,3 +21,29 @@ header
         text-transform: uppercase
         text-align: center
         font-size: $headerSize
+
+.tags
+    border: 2px solid $colorSecondDark
+    position: relative
+    margin-top: 50px
+    padding: 10px 15px
+    h1
+        background: white
+        display: inline-block
+        padding: 0 20px
+        position: absolute
+        top: -30px
+        left: 10px
+        font-size: 20px
+        margin-bottom: 0
+    h2
+        margin-bottom: 40px
+    ul
+        li
+            display: inline-block
+            a
+                color: $textColor
+                +transition(color, 400ms, cubic-bezier(0.39, 0.575, 0.565, 1))
+                &:hover
+                    color: $colorBase
+                    text-decoration: none
