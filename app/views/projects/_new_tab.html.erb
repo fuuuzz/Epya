@@ -10,8 +10,8 @@
 		</div>
 <% end %>
 </div>
-	<h2 class="page-header">Ajoute une actualité à ton projet</h2>
-	<% if user_signed_in? %>
+	<% if user_signed_in? && current_user == @project.user %>
+		<h2 class="page-header">Ajoute une actualité à ton projet</h2>
 		<%= form_for(@new, :url => {:controller => 'news', :action => "create"}, :remote => true) do |f| %>
 			<div class="form-group">
 				<%= f.label :title %>
@@ -24,11 +24,4 @@
 			<%= hidden_field_tag 'project_id', @project.id %>
 			<%= f.submit "Ajouter", :class => "btn btn-primary" %>
 		<% end %>
-	<% else %>
-		<p>
-			<%= link_to('Inscription', new_user_registration_path, :class => "btn btn-success")%>
-		</p>
-		<p>
-			<%= link_to('Connexion', user_session_path, :class => "btn btn-default")%>
-		</p>
 	<% end %>

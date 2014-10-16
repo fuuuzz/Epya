@@ -33,25 +33,28 @@
 	  <strong>Collaborators:</strong>
 	  <%= @project.collaborators %>
 	</p>
-	
-	<p id="followers">
-	  <strong>Followers:</strong>
-	  <ul>
-	  <% @followers.each do |f| %>
-	  	<li>
-	  		<%= link_to(f.name, user_path(f)) %>
-	  	</li>
-	  <% end %>
-	  <ul>
+	<p>
+		<strong>Followers:</strong>
+		<div id="followers">
+		  
+		  <ul>
+		  <% @followers.each do |f| %>
+		  	<li>
+		  		<%= link_to(f.name, user_path(f)) %>
+		  	</li>
+		  <% end %>
+		  <ul>
+		  	<% if user_signed_in? %>
+				<% if @followers.include?(current_user) || @project.user == current_user %>
+					<%= link_to 'Se desabonner', :action => 'unfollow', :remote => true %>
+				<% else %>
+					<%= link_to 'S\'abonner', :action => 'follow', :remote => true %>
+				<% end %>
+			<% end %>
+		</div>
 	</p>
 	
 	<% if user_signed_in? %>
-		
-		<% if @followers.include?(current_user) || @project.user == current_user %>
-			<%= link_to 'Se desabonner', :url => {:controller => 'projects', :action => 'unfollow'}, :remote => true, :class=>("btn btn-primary") %>
-		<% else %>
-			<%= link_to 'S\'abonner', follow_path(@project), :class=>("btn btn-primary") %>
-		<% end %>
 		
 		<% if @project.user_id == current_user.id %>
 	  		<%= link_to 'Editer', edit_project_path(@project), :class=>("btn btn-primary") %>

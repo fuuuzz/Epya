@@ -97,7 +97,7 @@ class ProjectsController < ApplicationController
     end
   end
   
-  # GET /project/1/follow
+  # GET-AJAX /project/1/follow
   # Save current user as follower for the project id that passed in url params
   def follow
     
@@ -109,28 +109,24 @@ class ProjectsController < ApplicationController
    @follower.project = @project
    
    if @follower.valid? && @project.user.id != current_user.id
-     
+     @follower.save
+     getFollowers
+     set_project
      respond_to do |format|
-       if @follower.save
-         format.html { redirect_to @project, notice: 'You follow this project' }
-         format.json { head :no_content }
-       end
+       format.js
      end
-     
-   else
-     redirect_to @project, notice: 'Sorry but, you already follow this project, or you are the author for this project !'
    end
    
   end
 
-
+  # GET-AJAX
   def unfollow
-    @follower = Follower.where(project_id: params[:id], user_id: current_user.id)
-    if @follower.destroy
-      getFollowers
-      respond_to do |format|
-        format.js
-      end
+    @follower = Follower.find_by(project_id: params[:id], user_id: current_user.id)
+    @follower.destroy
+    getFollowers
+    set_project
+    respond_to do |format|
+      format.js
     end
   end
 

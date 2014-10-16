@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'new_tab'
       get 'comment_tab'
       get 'show_tab'
+      get 'unfollow'
     end
   end
   resources  :users
