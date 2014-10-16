@@ -1,1 +1,1 @@
-$( "#followers" ).hide().html( "<%= escape_javascript( render( :partial => "follow", :locals => {:followers => @followers, :project => @project} ) ) %>" ).fadeIn("slow");
+$( "#followers" ).hide().html( "<%= escape_javascript( render( :partial => "partials/project/follow", :locals => {:followers => @followers, :project => @project} ) ) %>" ).fadeIn("slow");

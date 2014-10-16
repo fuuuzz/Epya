@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources  :projects do
     member do
-      get 'new_tab'
+      get 'news_tab'
       get 'comment_tab'
-      get 'show_tab'
+      get 'show_project_tab'
       get 'unfollow'
     end
   end
