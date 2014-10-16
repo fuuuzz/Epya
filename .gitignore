@@ -30,3 +30,4 @@ config/secrets.yml
 *.bowerrc
 bower.json
 config/database.yml
+/config/database.yml
