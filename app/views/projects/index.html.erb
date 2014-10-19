@@ -1,27 +1,55 @@
-</div>
-<h1 class="page-header">Listing projects</h1>
+<section class="project-list">
+    <div class="title-list">
+        <h1>Projects</h1>
+        <hr>
+        <p>The best of college creativity</p>
+    </div>
 
-<% @projects.each do |project| %>
-    <article class="col-md-4 item" style="background-image: url(<%= project.photo %>);">
-            <div class="color-overlay"></div>
-            <%= link_to project do %>
-                <div class="link-div"></div>
-            <% end %>
-        <div class="text-holder">
-            <h1><%= project.name%></h1>
-            <div class="project-description">
-                <%= raw(project.description[0,100]) %>&nbsp;[...]
+
+    <% @projects.each do |project| %>
+        <article class="col-lg-4 col-md-6 item" style="background-image: url(<%= project.photo %>);">
+                <div class="color-overlay"></div>
+                <%= link_to project do %>
+                    <div class="link-div"></div>
+                <% end %>
+            <div class="text-holder">
+                <h1><%= project.name%></h1>
+                <div class="project-description">
+                    <%= raw(project.description[0,100]) %>&nbsp;[...]
+                </div>
+                <span class="glyphicon glyphicon-hand-right"></span>
+                <ul class="tags-list">
+                    <li>Caméra</li>
+                    <li>Chaland</li>
+                    <li>Couture</li>
+                    <li>Cinéma</li>
+                </ul>   
             </div>
-            <span class="glyphicon glyphicon-hand-right"></span>
-            <ul class="tags-list">
-                <li>Caméra</li>
-                <li>Chaland</li>
-                <li>Couture</li>
-                <li>Cinéma</li>
-            </ul>   
-        </div>
-    </article>
-<% end %>
-
-<br>
-<div class="col-md-10 col-md-offset-1 col-xs-12">
+        </article>
+    <% end %>
+</section>
+<section class="project-more">
+    <h1>Looking for more ?</h1>
+    <section class="tags">
+        <h1>Tags</h1>
+        <h2>Check whatever you want</h2>
+        <ul>
+            <li><a href="#">Couture</a></li>
+            <li><a href="#">Chant</a></li>
+            <li><a href="#">Danse</a></li>
+            <li><a href="#">Physique</a></li>
+            <li><a href="#">Biologie</a></li>
+            <li><a href="#">Pornographie</a></li>
+            <li><a href="#">Mathématiques</a></li>
+            <li><a href="#">Langues</a></li>
+            <li><a href="#">Economie</a></li>
+            <li><a href="#">Phylosophie</a></li>
+            <li><a href="#">Psychologie</a></li>
+            <li><a href="#">Etudes</a></li>
+        </ul>
+    </section>
+</section>
+<section class="project-end">
+    <h1>Waouw</h1>
+    <p>You're far from home.</p>
+</section>
