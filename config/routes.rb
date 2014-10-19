@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   # HOMEPAGE
   root 'welcome#hello'
 
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
   resources  :users
   resources  :comments
   resources  :news
+  resources :tags
   
   #SPECIFIQUES
   get 'projects/:id/follow' => 'projects#follow', as: :follow

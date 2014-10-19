@@ -5,9 +5,8 @@
         <p>The best of college creativity</p>
     </div>
 
-
     <% @projects.each do |project| %>
-        <article class="col-lg-4 col-md-6 item" style="background-image: url(<%= project.photo %>);">
+        <article class="col-md-4 item" style="background-image: url(<%= project.photo %>);">
                 <div class="color-overlay"></div>
                 <%= link_to project do %>
                     <div class="link-div"></div>
@@ -19,10 +18,9 @@
                 </div>
                 <span class="glyphicon glyphicon-hand-right"></span>
                 <ul class="tags-list">
-                    <li>Caméra</li>
-                    <li>Chaland</li>
-                    <li>Couture</li>
-                    <li>Cinéma</li>
+                <% project.tags.each do |tag| %>
+                    <li><%=  tag.name %></li>
+                <% end %>
                 </ul>   
             </div>
         </article>

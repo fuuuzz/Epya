@@ -26,7 +26,11 @@
 	
 	<p>
 	  <strong>Tags:</strong>
-	  <%= @project.tags %>
+	  <ul>
+    <% @project.tags.each do |tag| %>
+      <li><%= tag.name %></li>
+    <% end %>
+  </ul>
 	</p>
 	
 	<p>

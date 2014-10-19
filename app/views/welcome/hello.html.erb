@@ -23,4 +23,24 @@
 <section class="projects">
     <h1>Projets populaires</h1>
     <p>Mettre les 3 projets avec le plus de followers ici</p>
+    <% @best_projects.each do |best_project| %>
+    	<article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
+            <div class="color-overlay"></div>
+            <%= link_to best_project do %>
+                <div class="link-div"></div>
+            <% end %>
+        <div class="text-holder">
+            <h1><%= best_project.name%></h1>
+            <div class="project-description">
+                <%= raw(best_project.description[0,100]) %>&nbsp;[...]
+            </div>
+            <span class="glyphicon glyphicon-hand-right"></span>
+            <ul class="tags-list">
+            <% best_project.tags.each do |tag| %>
+                <li><%=  tag.name %></li>
+            <% end %>
+            </ul>   
+        </div>
+    </article>
+    <% end %>
 </section>
