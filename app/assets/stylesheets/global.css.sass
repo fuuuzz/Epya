@@ -1,5 +1,6 @@
 @import compass
 @import variables
+@import mixins
 
 body
     font-family: 'Junction Regular'
@@ -7,3 +8,43 @@ body
 
 footer
     margin-top: 300px
+
+// Header Layout
+.classic-header
+    padding: 10px
+    display: block
+    background:  $colorBaseLight
+    margin-bottom: 40px
+    h1
+        color: white
+        display: inline-block
+        font-size: 32px
+        line-height: 40px
+        margin: 0
+        margin-left: 25px
+        a
+            color: white
+            &:hover
+                color: white
+                text-decoration: none
+    nav
+        float: right
+        ul
+            margin: 0
+        li
+            display: inline-block
+            margin: 0 10px
+            line-height: 40px
+            font-size: 16px
+            text-transform: uppercase
+            color: #b0b0b0
+            a
+                color: white
+                +transition(color, 300ms, $easeInQuad)
+
+a
+    color: $colorBaseLight
+    +transition(color, 300ms, $easeInQuad)
+    &:hover
+        text-decoration: none
+        color: $colorBase
