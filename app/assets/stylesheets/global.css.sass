@@ -7,7 +7,40 @@ body
     color: $textColor
 
 footer
-    margin-top: 300px
+    height: 300px
+    display: block
+    margin-top: 100px
+    background: #2E4347
+    color: white
+    padding: 20px 30px
+    h2
+        font-size: 24px
+    ul
+        margin-left: 30px
+        li
+            margin-bottom: 10px
+            font-size: 16px
+            a
+                color: white
+                position: relative
+                width: 100px
+                &:after
+                    content: ''
+                    display: block
+                    position: absolute
+                    height: 1px
+                    width: 0px
+                    background: $colorBaseLight
+                    bottom: -5px
+                    left: 0px
+                    +transition(width, 200ms, $easeInQuad)
+                &:hover
+                    color: white
+                    text-decoration: none
+                    &:after
+                        width: 100px
+
+
 
 // Header Layout
 .classic-header
@@ -40,7 +73,8 @@ footer
             color: #b0b0b0
             a
                 color: white
-                +transition(color, 300ms, $easeInQuad)
+                &:hover
+                    text-decoration: underline
 
 a
     color: $colorBaseLight

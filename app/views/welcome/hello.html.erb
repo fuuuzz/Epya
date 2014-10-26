@@ -6,51 +6,35 @@
 
 <section class="projects">
     <h1>Popular</h1>
-    <p>Mettre les 3 projets avec le plus de followers ici</p>
-    <% @best_projects.each do |best_project| %>
-        <article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
-            <div class="color-overlay"></div>
-            <%= link_to best_project do %>
-                <div class="link-div"></div>
-            <% end %>
-        <div class="text-holder">
-            <h1><%= best_project.name%></h1>
-            <div class="project-description">
-                <%= raw(best_project.description[0,100]) %>&nbsp;[...]
+</div>
+    <div class="project-list">    
+        <% @best_projects.each do |best_project| %>
+            <article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
+                <div class="color-overlay"></div>
+                <%= link_to best_project do %>
+                    <div class="link-div"></div>
+                <% end %>
+            <div class="text-holder">
+                <h1><%= best_project.name%></h1>
+                <div class="project-description">
+                    <%= raw(best_project.description[0,100]) %>&nbsp;[...]
+                </div>
+                <span class="glyphicon glyphicon-hand-right"></span>
+                <ul class="tags-list">
+                <% best_project.tags.each do |tag| %>
+                    <li><%=  tag.name %></li>
+                <% end %>
+                </ul>   
             </div>
-            <span class="glyphicon glyphicon-hand-right"></span>
-            <ul class="tags-list">
-            <% best_project.tags.each do |tag| %>
-                <li><%=  tag.name %></li>
-            <% end %>
-            </ul>   
-        </div>
-    </article>
-    <% end %>
-    <a href="/projects">Discover all projects</a>
-</section>
-
-<section class="tags">
-    <h1>Tags</h1>
-    <h2>Check whatever you want</h2>
-    <ul>
-        <li><a href="#">Couture</a></li>
-        <li><a href="#">Chant</a></li>
-        <li><a href="#">Danse</a></li>
-        <li><a href="#">Physique</a></li>
-        <li><a href="#">Biologie</a></li>
-        <li><a href="#">Pornographie</a></li>
-        <li><a href="#">Mathématiques</a></li>
-        <li><a href="#">Langues</a></li>
-        <li><a href="#">Economie</a></li>
-        <li><a href="#">Phylosophie</a></li>
-        <li><a href="#">Psychologie</a></li>
-        <li><a href="#">Etudes</a></li>
-    </ul>
+        </article>
+        <% end %>
+    </div>
+    <div class="col-md-10 col-md-offset-1 col-xs-12" >
+    <a href="/projects" class="all-projects">Discover all projects</a>
 </section>
 
 <section class="score">
-    <h1>What we has achieved</h1>
+    <h1>What we achieved</h1>
     <div class="col-md-6 achievement">
         <span class="number">1324</span> projects
     </div>
@@ -61,7 +45,7 @@
         <span class="number">714</span> workshops
     </div>
     <div class="col-md-6 achievement">
-        Only <span class="number">1</span> is missing. <a href="/projects/new">Yours</a>
+        <span class="number">985</span> likes. 
     </div>
 </section>
 
