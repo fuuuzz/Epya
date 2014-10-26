@@ -1,6 +1,6 @@
 @import compass
-@import variables
-@import mixins
+@import partials/variables
+@import partials/mixins
 
 body
     font-family: 'Junction Regular'
@@ -23,7 +23,6 @@ footer
             a
                 color: white
                 position: relative
-                width: 100px
                 &:after
                     content: ''
                     display: block
@@ -38,7 +37,7 @@ footer
                     color: white
                     text-decoration: none
                     &:after
-                        width: 100px
+                        width: 100%
 
 
 
@@ -75,6 +74,30 @@ footer
                 color: white
                 &:hover
                     text-decoration: underline
+            .dropdown-menu
+                left: auto
+                right: 0
+                li
+                    a
+                        color: $textColor
+                        position: relative
+                        &:after
+                            content: ''
+                            display: block
+                            position: absolute
+                            height: 1px
+                            width: 0
+                            background: $colorBaseLight
+                            bottom: -5px
+                            left: 0
+                            +transition(width, 200ms, $easeInQuad)
+                        &:hover
+                            color: $textColor
+                            text-decoration: none
+                            background: none
+                            &:after
+                                width: 100%
+
 
 a
     color: $colorBaseLight
