@@ -8,13 +8,6 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
-    # @projects.each do |project|
-    #   project.tags = Array.new
-    #   @project_tag = new
-    #   @tag = 
-    #   @tag
-    #   project.tags.push
-    # end
   end
 
   # GET /projects/1
@@ -65,23 +58,25 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-   @project = Project.new(project_params)
+   @project      = Project.new(project_params)
    @project.user = current_user                                                                                                                                                                                                       
-   @users    = User.all
-   @project  = Project.new(project_params)
+   @users        = User.all
+   @project      = Project.new(project_params)
    # Set project author
-   @project.user = current_user
-   @project.author = @project.user.name                                                                                                                                                                                     
+   @project.user    = current_user
+   @project.author  = @project.user.name
+    #Response                                                                                                                                                                                   
     respond_to do |format|
       if @project.save
         params[:tag].each do |tag|
           @tag = Tag.new
           @tag.name = tag
-          @tag.save
-          @project_tags = ProjectTag.new
-          @project_tags.project_id = @project.id
-          @project_tags.tag_id = @tag.id
-          @project_tags.save
+          if @tag.save
+            @project_tags = ProjectTag.new
+            @project_tags.project_id = @project.id
+            @project_tags.tag_id = @tag.id
+            @project_tags.save
+          end
         end     
           format.html { redirect_to @project, notice: 'Project was successfully created.' }
           format.json { render :show, status: :created, location: @project }

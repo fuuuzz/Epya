@@ -8,11 +8,17 @@
 </head>
 <body>
 
-<%= render partial: "partials/header" %>
+	<%= render partial: "partials/header" %>
 
-<main>
-	<%= yield %>
-</main>
+	<main class="container-fluid">
+	  <div class="row">
+	      <div class="col-md-10 col-md-offset-1 col-xs-12" >
+	          <%= yield %>
+	      </div>  
+	  </div>
+	</main>
+  
+  	<%= render partial: "partials/footer" %>
 
 </body>
 </html>

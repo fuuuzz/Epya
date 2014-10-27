@@ -4,11 +4,11 @@
     <a href="#">Check what we do <span class="glyphicon glyphicon-hand-right"></span></a>
 </section>
 
-<section class="projects">
+<section class="projects-list">
     <h1>Popular</h1>
-    <p>Mettre les 3 projets avec le plus de followers ici</p>
+    <div class="row">
     <% @best_projects.each do |best_project| %>
-        <article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
+      <article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
             <div class="color-overlay"></div>
             <%= link_to best_project do %>
                 <div class="link-div"></div>
@@ -21,12 +21,13 @@
             <span class="glyphicon glyphicon-hand-right"></span>
             <ul class="tags-list">
             <% best_project.tags.each do |tag| %>
-                <li><%=  tag.name %></li>
+                <li><%= tag.name %></li>
             <% end %>
             </ul>   
         </div>
     </article>
     <% end %>
+    </div>
     <a href="/projects">Discover all projects</a>
 </section>
 
@@ -34,18 +35,9 @@
     <h1>Tags</h1>
     <h2>Check whatever you want</h2>
     <ul>
-        <li><a href="#">Couture</a></li>
-        <li><a href="#">Chant</a></li>
-        <li><a href="#">Danse</a></li>
-        <li><a href="#">Physique</a></li>
-        <li><a href="#">Biologie</a></li>
-        <li><a href="#">Pornographie</a></li>
-        <li><a href="#">Mathématiques</a></li>
-        <li><a href="#">Langues</a></li>
-        <li><a href="#">Economie</a></li>
-        <li><a href="#">Phylosophie</a></li>
-        <li><a href="#">Psychologie</a></li>
-        <li><a href="#">Etudes</a></li>
+    <% @tags.each do |tag| %>
+        <li><%= link_to(tag.name, tag) %></li>
+    <% end %>
     </ul>
 </section>
 

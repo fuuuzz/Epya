@@ -1,10 +1,12 @@
 <section class="project-list">
+    
     <div class="title-list">
         <h1>Projects</h1>
         <hr>
         <p>The best of college creativity</p>
     </div>
-
+    
+	<div class="row">
     <% @projects.each do |project| %>
         <article class="col-md-4 item" style="background-image: url(<%= project.photo %>);">
                 <div class="color-overlay"></div>
@@ -25,28 +27,20 @@
             </div>
         </article>
     <% end %>
+    </div>
 </section>
+
 <section class="project-more">
     <h1>Looking for more ?</h1>
     <section class="tags">
         <h1>Tags</h1>
         <h2>Check whatever you want</h2>
         <ul>
-            <li><a href="#">Couture</a></li>
-            <li><a href="#">Chant</a></li>
-            <li><a href="#">Danse</a></li>
-            <li><a href="#">Physique</a></li>
-            <li><a href="#">Biologie</a></li>
-            <li><a href="#">Pornographie</a></li>
-            <li><a href="#">Mathématiques</a></li>
-            <li><a href="#">Langues</a></li>
-            <li><a href="#">Economie</a></li>
-            <li><a href="#">Phylosophie</a></li>
-            <li><a href="#">Psychologie</a></li>
-            <li><a href="#">Etudes</a></li>
+          
         </ul>
     </section>
 </section>
+
 <section class="project-end">
     <h1>Waouw</h1>
     <p>You're far from home.</p>
