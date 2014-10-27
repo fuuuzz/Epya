@@ -6,6 +6,7 @@
 
 <section class="projects-list">
     <h1>Popular</h1>
+
     <div class="row">
     <% @best_projects.each do |best_project| %>
       <article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
@@ -39,10 +40,11 @@
         <li><%= link_to(tag.name, tag) %></li>
     <% end %>
     </ul>
+
 </section>
 
 <section class="score">
-    <h1>What we has achieved</h1>
+    <h1>What we achieved</h1>
     <div class="col-md-6 achievement">
         <span class="number">1324</span> projects
     </div>
@@ -53,7 +55,7 @@
         <span class="number">714</span> workshops
     </div>
     <div class="col-md-6 achievement">
-        Only <span class="number">1</span> is missing. <a href="/projects/new">Yours</a>
+        <span class="number">985</span> likes. 
     </div>
 </section>
 

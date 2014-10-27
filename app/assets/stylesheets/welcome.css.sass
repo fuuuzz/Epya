@@ -1,8 +1,8 @@
 // Here is the style for the welcome controller :-)
 // Code with style
 @import compass
-@import mixins
-@import variables
+@import partials/mixins
+@import partials/variables
 
 html, body
     height: 100%
@@ -26,33 +26,21 @@ header.welcome
     text-align: center
     margin: 20px auto 100px auto
     h1
-        font-size: 50px
+        font-size: $headerTextSize
         margin-bottom: 30px
     p
-        font-size: 16px
+        font-size: 18px
+    a
+        font-size: 22px
 
-.tags
-    border: 2px solid $colorSecondDark
-    position: relative
-    margin-top: 50px
-    padding: 10px 15px
+.all-projects
+    margin-top: 30px
+
+.score
     h1
-        background: white
-        display: inline-block
-        padding: 0 20px
-        position: absolute
-        top: -30px
-        left: 10px
-        font-size: 20px
-        margin-bottom: 0
-    h2
-        margin-bottom: 40px
-    ul
-        li
-            display: inline-block
-            a
-                color: $textColor
-                +transition(color, 400ms, cubic-bezier(0.39, 0.575, 0.565, 1))
-                &:hover
-                    color: $colorBase
-                    text-decoration: none
+        font-size: $headerTextSize
+        margin-bottom: 30px
+    .achievement
+        font-size: 22px
+        .number
+            color: $colorBaseLight
