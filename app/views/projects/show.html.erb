@@ -1,73 +1,71 @@
-<div class="container">
-	<ul class="nav nav-tabs" role="tablist">
-	  <li class="tab_project active"><%= link_to('Le projet', :action => 'show_project_tab', :remote => true) %></li>
-	  <li class="tab_project"><%= link_to('Actualités', :action => 'news_tab', :remote => true) %></li>
-	  <li class="tab_project"><%= link_to('Commentaires', :action => 'comment_tab', :remote => true) %></li>
-	</ul>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="tab_project active"><%= link_to('Le projet', :action => 'show_project_tab', :remote => true) %></li>
+  <li class="tab_project"><%= link_to('Actualités', :action => 'news_tab', :remote => true) %></li>
+  <li class="tab_project"><%= link_to('Commentaires', :action => 'comment_tab', :remote => true) %></li>
+</ul>
 
-	<div id="ajaxContent">
-		<h1 class="page-header">
-		  <%= @project.name %>
-		</h1>
-		
-		<p>
-		  <strong>Auteur du projet : </strong>
-		  <%= link_to(@project.author, user_path(@project.user)) %>
-		</p>
-		
-		<p>
-		  <strong>Description:</strong>
-		  <%= raw(@project.description.gsub("\n", "<br />\n")) %>
-		</p>
-		
-		<p>
-		  <strong>Photo:</strong>
-		  <img src="<%= @project.photo %>" widht='200' height='175'>
-		</p>
-		
-		<p>
-		  <strong>Tags:</strong>
+<div id="ajaxContent">
+	<h1 class="page-header">
+	  <%= @project.name %>
+	</h1>
+	
+	<p>
+	  <strong>Auteur du projet : </strong>
+	  <%= link_to(@project.author, user_path(@project.user)) %>
+	</p>
+	
+	<p>
+	  <strong>Description:</strong>
+	  <%= raw(@project.description.gsub("\n", "<br />\n")) %>
+	</p>
+	
+	<p>
+	  <strong>Photo:</strong>
+	  <img src="<%= @project.photo %>" widht='200' height='175'>
+	</p>
+	
+	<p>
+	  <strong>Tags:</strong>
+	  <ul>
+    <% @project.tags.each do |tag| %>
+      <li><%= tag.name %></li>
+    <% end %>
+  </ul>
+	</p>
+	
+	<p>
+	  <strong>Collaborators:</strong>
+	  <%= @project.collaborators %>
+	</p>
+	<p>
+		<strong>Followers:</strong>
+		<div id="followers">
+		  
 		  <ul>
-	    <% @project.tags.each do |tag| %>
-	      <li><%= tag.name %></li>
-	    <% end %>
-	  </ul>
-		</p>
-		
-		<p>
-		  <strong>Collaborators:</strong>
-		  <%= @project.collaborators %>
-		</p>
-		<p>
-			<strong>Followers:</strong>
-			<div id="followers">
-			  
-			  <ul>
-			  <% @followers.each do |f| %>
-			  	<li>
-			  		<%= link_to(f.name, user_path(f)) %>
-			  	</li>
-			  <% end %>
-			  <ul>
-			  	<p>
-					<% if user_signed_in? && @project.author != current_user %>
-						<% if @followers.include?(current_user) %>
-							<%= link_to('Se désabonner', {:action => 'unfollow', :remote => true}, {:class => 'btn btn-primary'}) %>
-						<% elsif  @project.user != current_user  %>
-							<%= link_to('S\'abonner', {:action => 'follow', :remote => true}, {:class => 'btn btn-primary'}) %>
-						<% end %>
+		  <% @followers.each do |f| %>
+		  	<li>
+		  		<%= link_to(f.name, user_path(f)) %>
+		  	</li>
+		  <% end %>
+		  <ul>
+		  	<p>
+				<% if user_signed_in? && @project.author != current_user %>
+					<% if @followers.include?(current_user) %>
+						<%= link_to('Se désabonner', {:action => 'unfollow', :remote => true}, {:class => 'btn btn-primary'}) %>
+					<% elsif  @project.user != current_user  %>
+						<%= link_to('S\'abonner', {:action => 'follow', :remote => true}, {:class => 'btn btn-primary'}) %>
 					<% end %>
-				</p>
-			</div>
-		</p>
+				<% end %>
+			</p>
+		</div>
+	</p>
+	
+	<% if user_signed_in? %>
 		
-		<% if user_signed_in? %>
-			
-			<% if @project.user_id == current_user.id %>
-		  		<%= link_to 'Editer', edit_project_path(@project), :class=>("btn btn-primary") %>
-		  	<% end %>
-		  	
-		<% end %>
+		<% if @project.user_id == current_user.id %>
+	  		<%= link_to 'Editer', edit_project_path(@project), :class=>("btn btn-primary") %>
+	  	<% end %>
+	  	
+	<% end %>
 
-	</div>	
 </div>
