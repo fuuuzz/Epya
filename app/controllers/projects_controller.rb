@@ -61,30 +61,44 @@ class ProjectsController < ApplicationController
    @project      = Project.new(project_params)
    @project.user = current_user                                                                                                                                                                                                       
    @users        = User.all
-   @project      = Project.new(project_params)
    # Set project author
-   @project.user    = current_user
    @project.author  = @project.user.name
-    #Response                                                                                                                                                                                   
+    #Response   
     respond_to do |format|
+      
       if @project.save
+        
         params[:tag].each do |tag|
-          @tag = Tag.new
+         
+          @tag = Tag.new()
           @tag.name = tag
-          if @tag.save
-            @project_tags = ProjectTag.new
-            @project_tags.project_id = @project.id
-            @project_tags.tag_id = @tag.id
-            @project_tags.save
+          
+          @tagExist = Tag.where(name: tag)
+          if @tagExist.count() > 0
+             @project_tags.project_id = @project.id
+             @project_tags.tag_id = @tagExist.id
+          else
+             if @tag.save
+              @project_tags = ProjectTag.new
+              @project_tags.project_id = @project.id
+              @project_tags.tag_id = @tag.id
+              
+              if @project_tags.save
+                
+              else
+                format.html { render :edit }
+                format.json { render json: @project.errors, status: :unprocessable_entity }
+              end
+            end
           end
-        end     
-          format.html { redirect_to @project, notice: 'Project was successfully created.' }
-          format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+          
+        end
+         format.html { redirect_to @project, notice: 'Project was successfully created.' }
+         format.json { render :show, status: :created, location: @project }
       end
+      
     end
+                                                                                                                                                                                
   end
 
   # PATCH/PUT /projects/1
@@ -92,13 +106,35 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        
+        params[:tag].each do |tag|
+         
+          @tag = Tag.new()
+          @tag.name = tag
+          @tagExist = Tag.where(name: tag)
+          if @tagExist.count() > 0
+          
+          else
+             if @tag.save
+              @project_tags = ProjectTag.new
+              @project_tags.project_id = @project.id
+              @project_tags.tag_id = @tag.id
+              
+              if @project_tags.save
+                
+              else
+                format.html { render :edit }
+                format.json { render json: @project.errors, status: :unprocessable_entity }
+              end
+            end
+          end
+          
+        end
+         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+         format.json { render :show, status: :ok, location: @project }
       end
     end
+    
   end
 
   # DELETE /projects/1
@@ -141,6 +177,22 @@ class ProjectsController < ApplicationController
     set_project
     respond_to do |format|
       format.js
+    end
+  end
+  
+  # GET-AJAX
+  # Destroy association entry between tag param and project param
+  # select current project for ajax response
+  # @see project/destroy_tag.js.erb
+  # @return void
+  # @param params[:id] project id, params[:tag] tag id
+  def destroy_tag
+    @project = Project.find_by_id(params[:id])
+    @project_tag = ProjectTag.find_by(project_id: params[:id], tag_id: params[:tag])
+    if @project_tag.destroy
+      respond_to do |format|
+        format.js
+      end
     end
   end
 

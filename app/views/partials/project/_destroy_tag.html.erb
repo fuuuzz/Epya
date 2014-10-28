@@ -1,0 +1,13 @@
+ <div class="form-group">
+    <%= label_tag :tag %>
+    <div class="row tags_space" id="tags">
+    <% @project.tags.each do |tag| %>
+    	<div class="col-md-3">
+    		<%= tag.name %>
+    		<p id="removeTag">
+				<%= link_to 'supprimer le tag', {:action => 'destroy_tag', :tag => tag, :remote => true} %>
+			</p>
+    	</div>
+    <% end %>
+    </div>
+  </div>

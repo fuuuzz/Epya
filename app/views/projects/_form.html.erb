@@ -23,17 +23,22 @@
     <%= f.label :photo, 'Illustration' %>
     <%= f.text_field :photo, :class => 'form-control' %>
   </div>
-  <div class="field">
-    <%= label_tag :tag %><br>
-    <%= text_field_tag 'tag[]', nil %>
+  <div class="form-group">
+    <%= label_tag :tag %>
+    <div class="row tags_space" id="ajaxContent">
+    <% @project.tags.each do |tag| %>
+    	<div class="col-md-3">
+    		<%= tag.name %>
+    		<p id="removeTag">
+				<%= link_to 'supprimer le tag', {:action => 'destroy_tag', :tag => tag, :remote => true} %>
+			</p>
+    	</div>
+    <% end %>
+    </div>
   </div>
-    <div class="field">
-    <%= label_tag :tag %><br>
-    <%= text_field_tag 'tag[]', nil %>
-  </div>
-    <div class="field">
-    <%= label_tag :tag %><br>
-    <%= text_field_tag 'tag[]', nil %>
+  <p id="addTag">
+	<a class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></a>
+  </p>
   <div class="form-group">
     <%= f.label :collaborators, 'Les collaborateurs au projet' %>
     <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "", :class => 'form-control') %>

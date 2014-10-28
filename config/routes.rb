@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'comment_tab'
       get 'show_project_tab'
       get 'unfollow'
+      get 'destroy_tag'
     end
   end
   resources  :users
