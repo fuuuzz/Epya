@@ -5,10 +5,8 @@
 </section>
 
 </div>
-<section class="project-list">
-     <div class="col-md-10 col-md-offset-1 col-xs-12">
+<section class="project-list col-md-10 col-md-offset-1 col-xs-12">
         <h1>Popular</h1> 
-     </div>
     <% @best_projects.each do |best_project| %>
       <article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
             <div class="color-overlay"></div>
@@ -29,13 +27,9 @@
         </div>
     </article>
     <% end %>
-    <div class="col-md-10 col-md-offset-1 col-xs-12">
         <a href="/projects">Discover all projects</a>
-    </div>
 </section>
-<div class="col-md-10 col-md-offset-1 col-xs-12">
-
-<section class="score">
+<section class="score col-md-10 col-md-offset-1 col-xs-12">
     <h1>What we achieved</h1>
     <div class="col-md-6 achievement">
         <span class="number">1324</span> projects
@@ -50,4 +44,3 @@
         <span class="number">985</span> likes. 
     </div>
 </section>
-

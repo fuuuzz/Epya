@@ -1,53 +1,66 @@
-<h1 class="page-header">
+	<h1 class="page-header">
 	  <%= @project.name %>
 	</h1>
 	
 	<p>
-	  <strong>Auteur du projet : </strong>
-	  <%= link_to(@project.author, user_path(@project.user)) %>
+		<% if @project.photo != '' %>
+		  <img src="/uploads/images/projects/<%= @project.photo %>" widht='200' height='175'>
+		<% end %>
 	</p>
 	
 	<p>
-	  <strong>Description:</strong>
-	  <%= @project.description %>
+	  By : <%= link_to(@project.author, user_path(@project.user)) %>
 	</p>
 	
-	<p>
-	  <strong>Photo:</strong>
-	  <img src="<%= @project.photo %>" widht='200' height='175'>
-	</p>
+	<hr>
 	
 	<p>
-	  <strong>Tags:</strong>
-	  <%= @project.tags %>
+	  <%= raw(@project.description.gsub("\n", "<br />\n")) %>
 	</p>
 	
-	<p>
-	  <strong>Collaborators:</strong>
-	  <%= @project.collaborators %>
-	</p>
+	<hr>
 	
 	<p>
-		<strong>Followers:</strong>
-		<div id="followers">
-		  
-		  <ul>
-		  <% @followers.each do |f| %>
-		  	<li>
-		  		<%= link_to(f.name, user_path(f)) %>
-		  	</li>
+	  <% if @project.tags.any? %>
+	  	<strong>Tags:</strong>
+		<ul>
+		  <% @project.tags.each do |tag| %>
+		    <li><%= tag.name %></li>
 		  <% end %>
-		  <ul>
-		  	<p>
-				<% if user_signed_in? && @project.author != current_user %>
-					<% if @followers.include?(current_user) %>
-						<%= link_to('Se désabonner', {:action => 'unfollow', :remote => true}, {:class => 'btn btn-primary'}) %>
-					<% elsif  @project.user != current_user  %>
-						<%= link_to('S\'abonner', {:action => 'follow', :remote => true}, {:class => 'btn btn-primary'}) %>
+	  	</ul>
+  	  <% end %>
+	</p>
+	
+	<p>
+		<% if @project.collaborators %>
+			<strong>Collaborators:</strong>
+			<%= @project.collaborators %>
+		<% end %>
+	</p>
+	
+	<p>
+		<% if @followers.any? %>
+			<strong>Followers:</strong>
+			<div id="followers">
+			  
+			  <ul>
+			  <% @followers.each do |f| %>
+			  	<li>
+			  		<%= link_to(f.name, user_path(f)) %>
+			  	</li>
+			  <% end %>
+			  <ul>
+			  	<p>
+					<% if user_signed_in? && @project.author != current_user %>
+						<% if @followers.include?(current_user) %>
+							<%= link_to('Se désabonner', {:action => 'unfollow', :remote => true}, {:class => 'btn btn-primary'}) %>
+						<% elsif  @project.user != current_user  %>
+							<%= link_to('S\'abonner', {:action => 'follow', :remote => true}, {:class => 'btn btn-primary'}) %>
+						<% end %>
 					<% end %>
-				<% end %>
-			</p>
-		</div>
+				</p>
+			</div>
+		<% end %>
 	</p>
 	
 	<% if user_signed_in? %>

@@ -15,9 +15,6 @@ class ProjectsController < ApplicationController
   def show
   end
   
-  #
-  # TAB Project#show
-  #
   # GET-AJAX /projects/1
   def show_project_tab
      @project = Project.find(params[:id])
@@ -25,6 +22,7 @@ class ProjectsController < ApplicationController
        format.js
      end
   end
+  
   # GET-AJAX /projects/1
   def news_tab
     @project = Project.find(params[:id])
@@ -34,6 +32,7 @@ class ProjectsController < ApplicationController
         format.js
     end
   end
+  
   # GET-AJAX /projects/1
   def comment_tab
     @project = Project.find(params[:id])
@@ -58,47 +57,23 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-   @project      = Project.new(project_params)
-   @project.user = current_user                                                                                                                                                                                                       
-   @users        = User.all
+   @project       = Project.new(project_params)
+   @project.user  = current_user   
+   @project.photo = Project.imgupload(params[:project][:photo])                                                                                                                                                                                              
+   @users         = User.all
    # Set project author
    @project.author  = @project.user.name
     #Response   
     respond_to do |format|
-      
       if @project.save
-        
-        params[:tag].each do |tag|
-         
-          @tag = Tag.new()
-          @tag.name = tag
-          
-          @tagExist = Tag.where(name: tag)
-          if @tagExist.count() > 0
-             @project_tags.project_id = @project.id
-             @project_tags.tag_id = @tagExist.id
-          else
-             if @tag.save
-              @project_tags = ProjectTag.new
-              @project_tags.project_id = @project.id
-              @project_tags.tag_id = @tag.id
-              
-              if @project_tags.save
-                
-              else
-                format.html { render :edit }
-                format.json { render json: @project.errors, status: :unprocessable_entity }
-              end
-            end
-          end
-          
-        end
-         format.html { redirect_to @project, notice: 'Project was successfully created.' }
-         format.json { render :show, status: :created, location: @project }
+        save_tag_for_project(@project)
+        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.json { render :show, status: :created, location: @project }
+      else
+        format.html { render :new }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
-      
-    end
-                                                                                                                                                                                
+    end                                                                                                                                                                       
   end
 
   # PATCH/PUT /projects/1
@@ -106,35 +81,14 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        
-        params[:tag].each do |tag|
-         
-          @tag = Tag.new()
-          @tag.name = tag
-          @tagExist = Tag.where(name: tag)
-          if @tagExist.count() > 0
-          
-          else
-             if @tag.save
-              @project_tags = ProjectTag.new
-              @project_tags.project_id = @project.id
-              @project_tags.tag_id = @tag.id
-              
-              if @project_tags.save
-                
-              else
-                format.html { render :edit }
-                format.json { render json: @project.errors, status: :unprocessable_entity }
-              end
-            end
-          end
-          
-        end
-         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-         format.json { render :show, status: :ok, location: @project }
+        save_tag_for_project(@project)
+        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.json { render :show, status: :ok, location: @project }
+      else
+        format.html { render :new }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   # DELETE /projects/1
@@ -149,15 +103,11 @@ class ProjectsController < ApplicationController
   
   # GET-AJAX /project/1/follow
   # Save current user as follower for the project id that passed in url params
-  def follow
-    
+  def follow 
    @follower = Follower.new
-   
    @project = Project.find(params[:id])
-   
    @follower.user = current_user
    @follower.project = @project
-   
    if @follower.valid? && @project.user.id != current_user.id
      @follower.save
      getFollowers
@@ -165,8 +115,7 @@ class ProjectsController < ApplicationController
      respond_to do |format|
        format.js
      end
-   end
-   
+    end
   end
 
   # GET-AJAX
@@ -209,6 +158,33 @@ class ProjectsController < ApplicationController
       @followers_project.each do |f|
         user = User.find(f.user_id)
         @followers.push user
+      end
+    end
+    
+    def save_tag_for_project(project)
+      if params[:tag]
+        params[:tag].each do |tag|
+          @tag = Tag.new()
+          @tag.name = tag
+          @tagExist = Tag.find_by(name: tag)
+          if @tagExist
+            @tagTest = ProjectTag.find_by(project_id: project.id, tag_id: @tagExist)
+            if @tagTest
+            else
+              @project_tags = ProjectTag.new
+              @project_tags.project_id = project.id
+              @project_tags.tag_id = @tagExist.id
+              @project_tags.save
+            end 
+          else
+           if @tag.save
+            @project_tags = ProjectTag.new
+            @project_tags.project_id = project.id
+            @project_tags.tag_id = @tag.id
+            @project_tags.save
+            end
+          end
+        end
       end
     end
 
