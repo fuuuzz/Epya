@@ -4,11 +4,10 @@ class User < ActiveRecord::Base
   has_many :tags, :through => :user_tags
   has_many :comments
   has_many :news
-  
   has_many :followers
-  validates_associated :followers
-  
   has_many :projects, :through => :follower
+  
+  validates_associated :followers
   
   # Devise params
   devise :database_authenticatable, :registerable,

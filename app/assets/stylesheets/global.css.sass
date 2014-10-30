@@ -7,7 +7,6 @@ body
     color: $textColor
 
 footer
-    height: 300px
     display: block
     margin-top: 100px
     background: #2E4347
@@ -105,3 +104,10 @@ a
     &:hover
         text-decoration: none
         color: $colorBase
+
+.btn-primary
+    background-color: $colorSecondDark
+    +transition(all, 200ms, $easeInQuad)
+    border: none
+    &:hover
+        background-color: $colorSecond

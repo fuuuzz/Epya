@@ -56,6 +56,8 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   # POST /projects.json
+  # @use save_tag_for_project()
+  # @return void
   def create
    @project       = Project.new(project_params)
    @project.user  = current_user   
@@ -78,6 +80,8 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
+  # @use save_tag_for_project()
+  # @return void
   def update
     respond_to do |format|
       if @project.update(project_params)
@@ -130,11 +134,11 @@ class ProjectsController < ApplicationController
   end
   
   # GET-AJAX
-  # Destroy association entry between tag param and project param
-  # select current project for ajax response
+  # Destroy association entry between tag and project
   # @see project/destroy_tag.js.erb
+  # @param Int params[:id],  project id
+  # @param Int params[:tag], tag id
   # @return void
-  # @param params[:id] project id, params[:tag] tag id
   def destroy_tag
     @project = Project.find_by_id(params[:id])
     @project_tag = ProjectTag.find_by(project_id: params[:id], tag_id: params[:tag])
@@ -152,6 +156,7 @@ class ProjectsController < ApplicationController
     end
     
     # Get users who follow the project id that passed in request param
+    # @return Void
     def getFollowers
       @followers_project = Follower.where(project_id: params[:id])
       @followers = Array.new
@@ -161,6 +166,11 @@ class ProjectsController < ApplicationController
       end
     end
     
+    # Save tag function for edit/create project
+    # Check if tag.name already exist -> save new Tag or not
+    # Save assoc between this tag and current project
+    # @param Object project, project submited
+    # @return Void
     def save_tag_for_project(project)
       if params[:tag]
         params[:tag].each do |tag|

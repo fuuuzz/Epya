@@ -1,9 +1,11 @@
-<p id="notice"><%= notice %></p>
+<h1 class="page-header">
+	All projects with <%= link_to(@tag.name,@tag) %> tag
+</h1>
+	
+<% if @projects.any? %>
+	<% @projects.each do |project| %>
+		<h2><%= link_to(project.name,project) %></h2>
+		<hr>
+	<% end %>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @tag.name %>
-</p>
-
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>

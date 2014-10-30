@@ -10,8 +10,16 @@ class TagsController < ApplicationController
 
   # GET /tags/1
   # GET /tags/1.json
+  # Get all projects that match with the current tag
+  # @return void
   def show
-
+    @projects = Array.new
+    @projects_tag = ProjectTag.where(tag_id: params[:id])
+    if @projects_tag.any?
+      @projects_tag.each do |project_tag| 
+        @projects.push(Project.find_by_id(project_tag.project_id))
+      end
+    end
   end
 
   # GET /tags/new
