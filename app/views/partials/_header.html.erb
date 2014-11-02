@@ -8,7 +8,9 @@
       <li><a href="/projects">Projects</a></li>
       <li><a href="/idea">About</a></li>
       <% if user_signed_in? %>
-        <%= link_to(current_user.name, user_path(:id => current_user.id)) %>
+        <li>
+          <%= link_to(current_user.name, user_path(:id => current_user.id)) %>
+        </li>
         <li><%= link_to 'New Project', new_project_path %></li>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
       <% else %>
@@ -16,4 +18,4 @@
       <% end %>
     </ul>
   </nav>
-</header>
+</header> 
