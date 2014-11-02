@@ -87,7 +87,7 @@ class TagsController < ApplicationController
     @tagSearch = Tag.find_by(name: params[:searchTag])
     if @tagSearch.nil?
     else
-      @projects_tag = ProjectTag.where(tag_id: @tagSearch_id)
+      @projects_tag = ProjectTag.where(tag_id: @tagSearch.id)
       if @projects_tag.any?
         @projects_tag.each do |project_tag|
           @resultTag.push(Project.find_by_id(project_tag.project_id))

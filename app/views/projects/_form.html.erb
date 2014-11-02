@@ -57,7 +57,7 @@
     <% @users.each do |user| %>
       <div class="checkbox">
       	<label>
-      	<% if @collaborators.include? user.email %>
+      	<% if @collaborators.include?(user) %>
     		<%= check_box_tag 'collaborators[]', user.id, true %> <%= user.email %>
     	<% else %>
     		<%= check_box_tag 'collaborators[]', user.id %> <%= user.email %>

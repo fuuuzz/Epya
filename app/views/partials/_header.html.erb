@@ -4,16 +4,13 @@
 <header class="classic-header">
   <h1><a href="/">Epya</a></h1>
   <nav>
-    <ul>
-      <li>
-        <%= form_tag(:controller => 'tags',  :action => 'search')  do %>
-          <%= text_field_tag(:searchTag) %>
-          <%= submit_tag("Search") %>
-        <% end %>
-      </li>
-      
-      
-
+  	<ul>
+  	<li>
+    <%= form_tag({:controller => 'tags',  :action => 'search'})  do %>
+          <%= text_field_tag(:searchTag, nil) %>
+          <%= submit_tag("Search", :class => 'btn btn-default') %>
+    <% end %>
+    </li>
       <li><a href="/projects">Projects</a></li>
       <li><a href="/idea">About</a></li>
       <% if user_signed_in? %>

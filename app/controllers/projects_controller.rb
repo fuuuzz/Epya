@@ -83,6 +83,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+        save_collaborators_for_project(@project)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -209,7 +210,14 @@ class ProjectsController < ApplicationController
       end
     end
     
+    # Save collaborators for project
+    # @param Object project, project submited
+    # @return Void
     def save_collaborators_for_project(project)
+      @collaborators = Collaborator.where(project_id: project.id)
+      @collaborators.each do |c|
+        c.destroy
+      end
       params[:collaborators].each do |c|
         @collaborator = Collaborator.new
         @collaborator.user_id = c
