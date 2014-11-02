@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :index]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :index, :destroy_avatar]
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :is_good_user, only: [:edit]
   
@@ -32,6 +32,14 @@ class UsersController < ApplicationController
     end
   end
   
+  def destroy_avatar
+    @user.remove_avatar!
+    @user.save
+    respond_to do |format|
+      format.html {redirect_to edit_user_path(@user)}
+    end
+  end
+  
   private
 
     def set_user
@@ -39,7 +47,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :name)
+      params.require(:user).permit(:email, :name, :avatar)
     end
     
     def is_good_user

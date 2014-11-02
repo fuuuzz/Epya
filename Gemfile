@@ -7,6 +7,8 @@ gem 'pg'
 gem 'rails_12factor'
 #use devise gem for users management
 gem 'devise'
+# Upload images
+gem 'carrierwave'
 #Use tinymce for editing tools in textarea
 gem 'tinymce-rails'
 # Use SCSS for stylesheets

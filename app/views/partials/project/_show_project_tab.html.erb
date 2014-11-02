@@ -3,7 +3,7 @@
 	</h1>
 	
 	<p>
-		<% if @project.photo != '' %>
+		<% if @project.photo.url %>
 		  <img src="/uploads/images/projects/<%= @project.photo %>" widht='200' height='175'>
 		<% end %>
 	</p>
@@ -39,10 +39,9 @@
 	</p>
 	
 	<p>
-		<% if @followers.any? %>
 			<strong>Followers:</strong>
 			<div id="followers">
-			  
+		<% if @followers.any? %> 
 			  <ul>
 			  <% @followers.each do |f| %>
 			  	<li>
@@ -50,17 +49,19 @@
 			  	</li>
 			  <% end %>
 			  <ul>
-			  	<p>
-					<% if user_signed_in? && @project.author != current_user %>
-						<% if @followers.include?(current_user) %>
-							<%= link_to('Se désabonner', {:action => 'unfollow', :remote => true}, {:class => 'btn btn-primary'}) %>
-						<% elsif  @project.user != current_user  %>
-							<%= link_to('S\'abonner', {:action => 'follow', :remote => true}, {:class => 'btn btn-primary'}) %>
-						<% end %>
-					<% end %>
-				</p>
-			</div>
+		<% else %>
+			<p> Aucun followers </p>
 		<% end %>
+		<p>
+			<% if user_signed_in? && @project.author != current_user %>
+				<% if @followers.include?(current_user) %>
+					<%= link_to('Se désabonner', {:action => 'unfollow', :remote => true}, {:class => 'btn btn-primary'}) %>
+				<% elsif  @project.user != current_user  %>
+					<%= link_to('S\'abonner', {:action => 'follow', :remote => true}, {:class => 'btn btn-primary'}) %>
+				<% end %>
+			<% end %>
+		</p>
+		</div>
 	</p>
 	
 	<% if user_signed_in? %>

@@ -10,8 +10,8 @@
 	</h1>
 	
 	<p>
-		<% if @project.photo != '' %>
-		  <img src="/uploads/images/projects/<%= @project.photo %>" widht='200' height='175'>
+		<% if @project.photo.url %>
+		  <img src="<%= @project.photo.url %>" widht='200' height='175'>
 		<% end %>
 	</p>
 	

@@ -12,16 +12,21 @@ Rails.application.routes.draw do
       get 'show_project_tab'
       get 'unfollow'
       get 'destroy_tag'
+      get 'destroy_photo'
     end
   end
-  resources  :users
+  resources  :users do
+    member do
+      get 'destroy_avatar'
+    end
+  end
   resources  :comments
   resources  :news
   resources :tags
   
   #SPECIFIQUES
   get 'projects/:id/follow' => 'projects#follow', as: :follow
-  get 'faq' => 'welcome#faq'
+  get 'faq'  => 'welcome#faq'
   get 'team' => 'welcome#team'
   get 'idea' => 'welcome#idea'
   get 'terms-of-use' => 'welcome#terms'
