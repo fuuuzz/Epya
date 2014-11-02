@@ -21,8 +21,12 @@
 	    <div class="col-md-4 tags">
 	        <h2>Tags</h2>
 	        <ul>
-			    <% @tags_footer.each do |tag| %>
-			    	<li><a href="#"><%= tag.name %></a></li>
+			    <% if @tags_footer.any? %>
+			    	<% @tags_footer.each do |tag| %>
+			    		<li><a href="#"><%= tag.name %></a></li>
+			    	<% end %>
+			    <% else %>
+			    	<li>No tags yet</li>
 			    <% end %>
 	        </ul>
 	    </div>
