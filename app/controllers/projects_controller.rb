@@ -112,7 +112,7 @@ class ProjectsController < ApplicationController
    @follower.project = @project
    if @follower.valid? && @project.user.id != current_user.id
      @follower.save
-     getFollowers
+     get_followers_and_collaborators
      set_project
      respond_to do |format|
        format.js
@@ -124,7 +124,7 @@ class ProjectsController < ApplicationController
   def unfollow
     @follower = Follower.find_by(project_id: params[:id], user_id: current_user.id)
     @follower.destroy
-    getFollowers
+    get_followers_and_collaborators
     set_project
     respond_to do |format|
       format.js
