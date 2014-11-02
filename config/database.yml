@@ -4,7 +4,6 @@ development:
   pool: 5
   timeout: 5000
   port: 5432
-  password: post
 
 test:
   adapter: postgresql
