@@ -4,8 +4,6 @@ development:
   pool: 5
   timeout: 5000
   port: 5432
-  user: postgres
-  password: post
 
 test:
   adapter: postgresql
@@ -13,8 +11,7 @@ test:
   pool: 5
   timeout: 5000
   port: 5432
-  password: arthurPostgresql
-  
+
 production:
   adapter: postgresql
   pool: 5

@@ -15,5 +15,5 @@ class Project < ActiveRecord::Base
 	has_many :users, :through => :follower
 	
 	mount_uploader :photo, PhotoUploader
- 
+
 end
