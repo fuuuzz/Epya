@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   
   def hello
     @best_projects = Project.order(followers: :desc).limit(3)
-    @tags = Tag.all
+    @tags_footer = Tag.all.limit(5)
   end
-  
+    
 end
