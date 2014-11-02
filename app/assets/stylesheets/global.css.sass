@@ -114,21 +114,10 @@ footer
 
 a
     color: $colorBaseLight
-    position: relative
     +transition(color, 300ms, $easeInQuad)
-    &:after
-        content: ''
-        display: block
-        position: absolute
-        width: 100%
-        height: 1px
-        bottom: 0px
-        background-color: $colorBase
-        +transition(height, 400ms, $easeInQuad)
     &:hover
         text-decoration: none
-        &:after
-            height: 100%
+        color: $colorBase
 
 .btn-primary
     background-color: $colorSecondDark

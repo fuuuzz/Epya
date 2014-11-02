@@ -21,5 +21,9 @@ Rails.application.routes.draw do
   
   #SPECIFIQUES
   get 'projects/:id/follow' => 'projects#follow', as: :follow
+  get 'faq' => 'welcome#faq'
+  get 'team' => 'welcome#team'
+  get 'idea' => 'welcome#idea'
+  get 'terms-of-use' => 'welcome#terms'
 
 end
