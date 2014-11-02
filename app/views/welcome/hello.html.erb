@@ -8,7 +8,7 @@
 <section class="project-list col-md-10 col-md-offset-1 col-xs-12">
         <h1>Popular</h1> 
     <% @best_projects.each do |best_project| %>
-      <article class="col-md-4 item" style="background-image: url(<%= best_project.photo %>);">
+      <article class="col-md-4 item" style="background-image: url(/uploads/images/projects/<%= best_project.photo %>);">
             <div class="color-overlay"></div>
             <%= link_to best_project do %>
                 <div class="link-div"></div>
