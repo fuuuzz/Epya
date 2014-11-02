@@ -21,12 +21,13 @@
 	    <div class="col-md-4 tags">
 	        <h2>Tags</h2>
 	        <ul>
-	            <li><a href="#">Tag 1</a></li>
-	            <li><a href="#">Tag 2</a></li>
-	            <li><a href="#">Tag 3</a></li>
-	            <li><a href="#">Tag 4</a></li>
-	            <li><a href="#">Tag 5</a></li>
-	            <li><a href="#">tag 6</a></li>
+			    <% if @tags_footer.any? %>
+			    	<% @tags_footer.each do |tag| %>
+			    		<li><a href="#"><%= tag.name %></a></li>
+			    	<% end %>
+			    <% else %>
+			    	<li>No tags yet</li>
+			    <% end %>
 	        </ul>
 	    </div>
 	</div>

@@ -1,3 +1,4 @@
+
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :destroy_photo, :destroy_tag, :show_project_tab, :news_tab, :comment_tab]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
