@@ -14,8 +14,11 @@ class NewsController < ApplicationController
     @new = New.new(new_params)
     @new.user = current_user
     @new.project_id = params[:project_id]
+    @project = Project.find_by_id(params[:project_id])
+    @user = @project.user
     respond_to do |format|
       if @new.save
+        Notifer.news_email(@user).deliver
         format.js
       end
     end
