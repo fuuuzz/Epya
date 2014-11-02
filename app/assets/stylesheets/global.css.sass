@@ -90,10 +90,12 @@ footer
                 input
                     height: 40px
                 input[type=text]
+                    position: relative
                     border: none
                     padding-left: 10px
-                    color: $colorBase
+                    color: $colorBaseLight
                     +placeholder(#d3d3d3)
+                    +transition(all, 400ms, $easeInQuad)
                     &:focus
                         outline: none
                         border: none
