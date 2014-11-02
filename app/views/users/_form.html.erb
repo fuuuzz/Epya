@@ -26,14 +26,19 @@
   
   <h2>Avatar</h2>
   <% if @user.avatar.url %>
+  <div class="form-group">
 	  <img src="<%= @user.avatar.url %>">
-	  <%= link_to 'Supprimer l\'avatar', :action => 'destroy_avatar' %>
-  <% end %>
+	  <p>
+	  	<%= link_to 'Supprimer l\'avatar', :action => 'destroy_avatar' %>
+	  </p>
+  </div>
+  <% else %>
   <div class="user_field form-group">
     <%= f.file_field :avatar %>
   </div>
+  <% end %>
   
-  <div class="actions">
+  <div class="actions form-group">
     <%= f.submit({:class => 'btn btn-primary'}) %>
   </div>
   

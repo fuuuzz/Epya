@@ -2,7 +2,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :destroy_photo, :destroy_tag, :show_project_tab, :news_tab, :comment_tab]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
-  before_action :getFollowers, only: [:show, :show_project_tab]
+  before_action :get_followers_and_collaborators, only: [:show, :show_project_tab, :edit, :new]
 
   # GET /projects
   # GET /projects.json
@@ -66,6 +66,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         save_tag_for_project(@project)
+        save_collaborators_for_project(@project)
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -161,12 +162,18 @@ class ProjectsController < ApplicationController
     
     # Get users who follow the project id that passed in request param
     # @return Void
-    def getFollowers
+    def get_followers_and_collaborators
       @followers_project = Follower.where(project_id: params[:id])
+      @collaborators_project = Collaborator.where(project_id: params[:id])
       @followers = Array.new
+      @collaborators = Array.new
       @followers_project.each do |f|
         user = User.find(f.user_id)
         @followers.push user
+      end
+      @collaborators_project.each do |f|
+        user = User.find(f.user_id)
+        @collaborators.push user
       end
     end
     
@@ -201,9 +208,18 @@ class ProjectsController < ApplicationController
         end
       end
     end
+    
+    def save_collaborators_for_project(project)
+      params[:collaborators].each do |c|
+        @collaborator = Collaborator.new
+        @collaborator.user_id = c
+        @collaborator.project_id = project.id
+        @collaborator.save
+      end
+    end
 
     def project_params
-      params.require(:project).permit(:name, :description, :photo, :tag => [])
+      params.require(:project).permit(:name, :description, :photo, :tag => [], :collaborators => [])
     end
 
 end

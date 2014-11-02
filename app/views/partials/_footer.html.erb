@@ -23,7 +23,7 @@
 	        <ul>
 			    <% if @tags_footer.any? %>
 			    	<% @tags_footer.each do |tag| %>
-			    		<li><a href="#"><%= tag.name %></a></li>
+			    		<li><%= link_to(tag.name,tag) %></li>
 			    	<% end %>
 			    <% else %>
 			    	<li>No tags yet</li>

@@ -71,6 +71,21 @@
 		</div>
 	</p>
 	
+	<p>
+	<strong>Collaborateurs</strong>
+		<% if @collaborators.any? %> 
+			  <ul>
+			  <% @collaborators.each do |c| %>
+			  	<li>
+			  		<%= link_to(c.name, user_path(c)) %>
+			  	</li>
+			  <% end %>
+			  <ul>
+		<% else %>
+			<p> Aucun Collaborateurs sur ce projet </p>
+		<% end %>
+	</p>
+	
 	<% if user_signed_in? %>
 		
 		<% if @project.user_id == current_user.id %>
