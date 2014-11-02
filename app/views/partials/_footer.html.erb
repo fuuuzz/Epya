@@ -7,14 +7,13 @@
 	            <li><a href="/idea">The idea</a></li>
 	            <li><a href="/team">The team</a></li>
 	            <li><a href="/terms-of-use">Terms of use</a></li>
-	            <li><a href="/faq">FAQ</a></li>
 	        </ul>
 	    </div>
 	    <div class="col-md-4 hello">
 	        <h2>Leave us a little word</h2>
 	        <ul>
 	            <li><a href="#">on Twitter</a></li>
-	            <li><a href="#">on Github</a></li>
+	            <li><a href="https://github.com/PqBenoit/Epya/">on Github</a></li>
 	            <li><a href="#">or directly</a></li>
 	        </ul>
 	    </div>
@@ -23,7 +22,7 @@
 	        <ul>
 			    <% if @tags_footer.any? %>
 			    	<% @tags_footer.each do |tag| %>
-			    		<li><a href="#"><%= tag.name %></a></li>
+			    		<li><%= link_to(tag.name,tag) %></li>
 			    	<% end %>
 			    <% else %>
 			    	<li>No tags yet</li>

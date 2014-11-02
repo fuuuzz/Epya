@@ -54,7 +54,17 @@
   
   <div class="form-group">
     <%= f.label :collaborators, 'Les collaborateurs au projet' %>
-    <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "", :class => 'form-control') %>
+    <% @users.each do |user| %>
+      <div class="checkbox">
+      	<label>
+      	<% if @collaborators.include?(user) %>
+    		<%= check_box_tag 'collaborators[]', user.id, true %> <%= user.email %>
+    	<% else %>
+    		<%= check_box_tag 'collaborators[]', user.id %> <%= user.email %>
+    	<% end %>
+    	</label>
+     </div>
+    <% end %>
   </div>
   
   <div class="actions">
