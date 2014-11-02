@@ -2,7 +2,7 @@
 	All projects with <%= link_to(@tagSearch.name,@tagSearch) %> tag
 </h1>
 	
-<% if @resultTag.any? %>
+<% if @resultTag.count() > 0 %>
 	<% @resultTag.each do |project| %>
 		<h2><%= link_to(project.name,project) %></h2>
 		<p>By : <%= link_to(project.author,project.user) %></p>
