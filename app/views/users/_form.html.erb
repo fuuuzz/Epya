@@ -10,7 +10,8 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <h2>Infos</h2>
   <div class="user_field form-group">
     <%= f.text_field :name, :placeholder => @user.name %>
     <span class="edit">edit</span>
@@ -21,6 +22,15 @@
     <%= f.text_field :email, :placeholder => @user.email %>
     <span class="edit">edit</span>
     <div class="edit_underline"></div>
+  </div>
+  
+  <h2>Avatar</h2>
+  <% if @user.avatar.url %>
+	  <img src="<%= @user.avatar.url %>">
+	  <%= link_to 'Supprimer l\'avatar', :action => 'destroy_avatar' %>
+  <% end %>
+  <div class="user_field form-group">
+    <%= f.file_field :avatar %>
   </div>
   
   <div class="actions">

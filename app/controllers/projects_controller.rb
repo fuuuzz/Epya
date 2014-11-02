@@ -1,8 +1,8 @@
+
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :destroy_photo, :destroy_tag, :show_project_tab, :news_tab, :comment_tab]
   before_action :authenticate_user!, only: [:edit, :update, :destroy, :new, :create]
   before_action :getFollowers, only: [:show, :show_project_tab]
-
 
   # GET /projects
   # GET /projects.json
@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
   
   # GET-AJAX /projects/1
   def show_project_tab
-     @project = Project.find(params[:id])
      respond_to do |format|
        format.js
      end
@@ -25,7 +24,6 @@ class ProjectsController < ApplicationController
   
   # GET-AJAX /projects/1
   def news_tab
-    @project = Project.find(params[:id])
     @new = New.new()
     @news = New.where(project_id: params[:id])
     respond_to do | format |  
@@ -35,7 +33,6 @@ class ProjectsController < ApplicationController
   
   # GET-AJAX /projects/1
   def comment_tab
-    @project = Project.find(params[:id])
     @comment = Comment.new
     @comments = Comment.where(project_id: params[:id])
     respond_to do | format |  
@@ -61,7 +58,7 @@ class ProjectsController < ApplicationController
   def create
    @project       = Project.new(project_params)
    @project.user  = current_user   
-   @project.photo = Project.imgupload(params[:project][:photo])                                                                                                                                                                                              
+   @project.photo = params[:project][:photo]                                                                                                                                                                                             
    @users         = User.all
    # Set project author
    @project.author  = @project.user.name
@@ -85,7 +82,6 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        save_tag_for_project(@project)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -134,13 +130,21 @@ class ProjectsController < ApplicationController
   end
   
   # GET-AJAX
+  # Destroy project's photo
+  # @see project/destroy_photo.js.erb
+  def destroy_photo
+    @project.remove_photo!
+    @project.save
+    respond_to do |format|
+      format.html {redirect_to edit_project_path(@project)}
+    end
+  end
+  
+  # GET-AJAX
   # Destroy association entry between tag and project
   # @see project/destroy_tag.js.erb
-  # @param Int params[:id],  project id
-  # @param Int params[:tag], tag id
   # @return void
   def destroy_tag
-    @project = Project.find_by_id(params[:id])
     @project_tag = ProjectTag.find_by(project_id: params[:id], tag_id: params[:tag])
     if @project_tag.destroy
       respond_to do |format|

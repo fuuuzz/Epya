@@ -15,14 +15,25 @@
     <%= f.label :name, 'Nom' %>
     <%= f.text_field :name, :class => 'form-control' %>
   </div>
+  
+  <div id="photoAjax">
+	  <% if @project.photo.url.nil? || @project.photo.url == "" %>
+		  <div class="form-group">
+		    <%= f.label :photo, 'Illustration' %>
+		    <%= f.file_field :photo, :data => { :max_file_size => 5.megabytes }, :class => 'form-control' %>
+		  </div>
+	  <% else %>
+	  	<img src="<%= @project.photo.url %>" widht='200' height='175'>
+	  	<p>
+	  		<%= link_to 'supprimer l\'illustration', {:action => 'destroy_photo'} %>
+	  	</p>
+	  <% end %>
+  </div>
   <div class="form-group">
     <%= f.label :description, 'Description' %>
     <%= f.text_area :description, :rows => '25', :class => 'form-control tinymce' %>
   </div>
-  <div class="form-group">
-    <%= f.label :photo, 'Illustration' %>
-    <%= f.file_field :photo, :class => 'form-control' %>
-  </div>
+  
   <div class="form-group">
     <%= label_tag :tag %>
     <div class="row tags_space" id="ajaxContent">
@@ -36,13 +47,16 @@
     <% end %>
     </div>
   </div>
+  
   <p id="addTag">
 	<a class="btn btn-default">Ajouter un tag&nbsp;&nbsp;<i class="glyphicon glyphicon-plus"></i></a>
   </p>
+  
   <div class="form-group">
     <%= f.label :collaborators, 'Les collaborateurs au projet' %>
     <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "", :class => 'form-control') %>
   </div>
+  
   <div class="actions">
     <%= f.submit 'Valider', :class => 'btn btn-primary' %>
   </div>

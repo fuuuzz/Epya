@@ -5,6 +5,8 @@
 <% if @projects.any? %>
 	<% @projects.each do |project| %>
 		<h2><%= link_to(project.name,project) %></h2>
+		<p>By : <%= link_to(project.author,project.user) %></p>
+		<p>Le : <%= project.created_at.strftime("%d-%m-%Y") %></p>
 		<hr>
 	<% end %>
 <% end %>

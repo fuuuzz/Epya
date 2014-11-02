@@ -14,14 +14,27 @@ class Project < ActiveRecord::Base
 	has_many :followers
 	has_many :users, :through => :follower
 	
+	mount_uploader :photo, PhotoUploader
+	
 	# Method for project's image upload
-	# @param File file, the file submited
-	# @return String name, the file name to save in database
-	def self.imgupload(file)
-	name = file.original_filename
-	File.open(Rails.root.join('public', 'uploads', 'images', 'projects', file.original_filename), 'wb') do |f|
-	f.write(file.read)
-	end
-    return name
-  end
+
+  # @param File file, the file submited
+  # @return String name, the file name to save in database
+  def self.imgupload(file)
+    if file == "" || !file
+      return
+   else
+      name   = file.original_filename
+      ext    = File.extname(name)
+      random = rand(1..10000).to_s
+      name   = name+'_'+random+ext
+      while FileTest.exists?(Rails.root + 'public/uploads/images/projects/' + name) do
+        name = name+'_'+rand(1..10000).to_s+ext
+      end
+      File.open(Rails.root.join('public', 'uploads', 'images', 'projects', name), 'wb') do |f|
+        f.write(file.read)
+      end
+      return name
+   end
+ end
 end
