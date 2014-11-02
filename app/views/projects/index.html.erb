@@ -1,17 +1,32 @@
-<h1 class="page-header">Listing projects</h1>
+<section class="project-list">
+    
+    <div class="title-list">
+        <h1>Projects</h1>
+        <hr>
+        <p>The best of college creativity</p>
+    </div>
+    
+	<div class="row">
+    <% @projects.each do |project| %>
+        <article class="col-md-4 item" style="background-image: url(/uploads/images/projects/<%= project.photo %>);">
+                <div class="color-overlay"></div>
+                <%= link_to project do %>
+                    <div class="link-div"></div>
+                <% end %>
+            <div class="text-holder">
+                <h1><%= project.name%></h1>
+                <div class="project-description">
+                    <%= raw(project.description[0,100]) %>&nbsp;[...]
+                </div>
+                <span class="glyphicon glyphicon-hand-right"></span>
+                <ul class="tags-list">
+                <% project.tags.each do |tag| %>
+                    <li><%=  tag.name %></li>
+                <% end %>
+                </ul>
+            </div>
+        </article>
+    <% end %>
 
-<% @projects.each do |project| %>
-    <article class="col-md-4">
-        <div class="image">
-           <%= link_to project do %>
-  				<%= image_tag project.photo %>
-			<% end %>
-        </div>
-        <%= link_to raw("<h1>#{project.name}</h1>"), project %>
-        <p>by <%= project.author %></p>
-        <p><%= project.description[0,200] %>&nbsp;[...]</p>
-        <%= link_to raw("<span class=\"read-more\">Voir le projet</span>"), project, :class => 'btn btn-primary' %>
-    </article>
-<% end %>
-
-<br>
+    </div>
+</section>

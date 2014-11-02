@@ -1,0 +1,46 @@
+// Here is the style for the welcome controller :-)
+// Code with style
+@import compass
+@import partials/mixins
+@import partials/variables
+
+html, body
+    height: 100%
+    min-height: 100%
+    width: 100%
+
+header.welcome
+    display: block
+    width: 100%
+    height: 100%
+    background: url('/assets/welcome/hello_header.jpg')
+    color: white
+    +backgroundSize(cover)
+    h1
+        margin: 0
+        text-transform: uppercase
+        text-align: center
+        font-size: $headerSize
+
+.intro
+    text-align: center
+    margin: 20px auto 100px auto
+    h1
+        font-size: $headerTextSize
+        margin-bottom: 30px
+    p
+        font-size: 18px
+    a
+        font-size: 22px
+
+.all-projects
+    margin-top: 30px
+
+.score
+    h1
+        font-size: $headerTextSize
+        margin-bottom: 30px
+    .achievement
+        font-size: 22px
+        .number
+            color: $colorBaseLight

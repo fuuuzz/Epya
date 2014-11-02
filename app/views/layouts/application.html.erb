@@ -7,18 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <div class="content-container">
+    	<%= render partial: "partials/header" %>
 
-<%= render partial: "partials/header" %>
-
-<main>
-	<div class="row">
-		<div class="container-fluid">
-			<div class="col-md-10 col-md-offset-1 col-xs-12" >
-				<%= yield %>
-			</div>	
-		</div>
-	</div>
-</main>
-
+    	<main class="container-fluid">
+    	  <div class="row">
+    	      <div class="col-md-10 col-md-offset-1 col-xs-12" >
+    	          <%= yield %>
+    	      </div>  
+    	  </div>
+    	</main>
+      
+      	<%= render partial: "partials/footer" %>
+    </div>
 </body>
 </html>

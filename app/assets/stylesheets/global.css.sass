@@ -1,0 +1,133 @@
+@import compass
+@import partials/variables
+@import partials/mixins
+
+html, body
+    font-family: 'Junction Regular'
+    color: $textColor
+    margin: 0
+    padding: 0
+    height: 100%
+
+.content-container
+    min-height: 100%
+    position: relative
+    main
+        padding-bottom: 288px
+    footer
+        position: absolute
+        bottom: 0
+        width: 100%
+        height: 288px
+
+footer
+    display: block
+    margin-top: 100px
+    background: #2E4347
+    color: white
+    padding: 20px 30px
+    h2
+        font-size: 24px
+    ul
+        margin-left: 30px
+        li
+            margin-bottom: 10px
+            font-size: 16px
+            a
+                color: white
+                position: relative
+                &:after
+                    content: ''
+                    display: block
+                    position: absolute
+                    height: 1px
+                    width: 0px
+                    background: $colorBaseLight
+                    bottom: -5px
+                    left: 0px
+                    +transition(width, 200ms, $easeInQuad)
+                &:hover
+                    color: white
+                    text-decoration: none
+                    &:after
+                        width: 100%
+
+
+
+// Header Layout
+.classic-header
+    padding: 10px
+    display: block
+    background:  $colorBaseLight
+    margin-bottom: 40px
+    h1
+        color: white
+        display: inline-block
+        font-size: 32px
+        line-height: 40px
+        margin: 0
+        margin-left: 25px
+        a
+            color: white
+            &:hover
+                color: white
+                text-decoration: none
+    nav
+        float: right
+        ul
+            margin: 0
+        li
+            display: inline-block
+            margin: 0 10px
+            line-height: 40px
+            font-size: 16px
+            text-transform: uppercase
+            color: #b0b0b0
+            a
+                color: white
+                &:hover
+                    text-decoration: underline
+            .dropdown-menu
+                left: auto
+                right: 0
+                li
+                    a
+                        color: $textColor
+                        position: relative
+                        &:after
+                            content: ''
+                            display: block
+                            position: absolute
+                            height: 1px
+                            width: 0
+                            background: $colorBaseLight
+                            bottom: -5px
+                            left: 0
+                            +transition(width, 200ms, $easeInQuad)
+                        &:hover
+                            color: $textColor
+                            text-decoration: none
+                            background: none
+                            &:after
+                                width: 100%
+
+
+a
+    color: $colorBaseLight
+    +transition(color, 300ms, $easeInQuad)
+    &:hover
+        text-decoration: none
+        color: $colorBase
+
+.btn-primary
+    background-color: $colorSecondDark
+    +transition(all, 200ms, $easeInQuad)
+    border: none
+    &:hover
+        background-color: $colorSecond
+.btn-success
+    background-color: $colorBaseDark
+    +transition(all, 200ms, $easeInQuad)
+    border: none
+    &:hover
+        background-color: $colorBase

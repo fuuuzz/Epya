@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :index]
   before_action :authenticate_user!, only: [:edit, :update]
+  before_action :is_good_user, only: [:edit]
   
   # GET /pages
   # GET /pages.json
@@ -39,6 +40,14 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:email, :name)
+    end
+    
+    def is_good_user
+      if params[:id] != current_user.id
+        respond_to do |format|
+          format.html { redirect_to @user, notice: "Vous n'avez pas le droit de modifier un autre profil que le vôtre, try again !" }
+        end
+      end
     end
     
 end

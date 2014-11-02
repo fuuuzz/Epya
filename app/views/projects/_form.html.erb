@@ -1,4 +1,4 @@
-<%= form_for(@project) do |f| %>
+<%= form_for(@project, :multipart => true) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -17,16 +17,28 @@
   </div>
   <div class="form-group">
     <%= f.label :description, 'Description' %>
-    <%= f.text_area :description, :class => 'form-control' %>
+    <%= f.text_area :description, :rows => '25', :class => 'form-control tinymce' %>
   </div>
   <div class="form-group">
     <%= f.label :photo, 'Illustration' %>
-    <%= f.text_field :photo, :class => 'form-control' %>
+    <%= f.file_field :photo, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :tags, 'Les tags définissant le projet' %>
-    <%= f.text_field :tags, :class => 'form-control' %>
+    <%= label_tag :tag %>
+    <div class="row tags_space" id="ajaxContent">
+    <% @project.tags.each do |tag| %>
+    	<div class="col-md-3">
+    		<%= tag.name %>
+    		<p id="removeTag">
+				<%= link_to 'supprimer le tag', {:action => 'destroy_tag', :tag => tag, :remote => true} %>
+			</p>
+    	</div>
+    <% end %>
+    </div>
   </div>
+  <p id="addTag">
+	<a class="btn btn-default">Ajouter un tag&nbsp;&nbsp;<i class="glyphicon glyphicon-plus"></i></a>
+  </p>
   <div class="form-group">
     <%= f.label :collaborators, 'Les collaborateurs au projet' %>
     <%= f.select(:collaborators, @users.map { |s| [ s.email, s.id ] }, :prompt => "", :class => 'form-control') %>

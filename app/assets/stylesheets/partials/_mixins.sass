@@ -1,0 +1,30 @@
+/* Mixins */
+=transition($p, $d, $f)
+    +transition-property($p)
+    +transition-duration($d)
+    +transition-timing-function($f)
+=selectNone()
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+=placeholder($color)
+    &::-webkit-input-placeholder
+        color: $color
+    &:-moz-placeholder
+        color: $color
+    &::-moz-placeholder
+        color: $color
+    &:-ms-input-placeholder
+        color: $color
+=boxSizing($box)
+    -webkit-box-sizing: $box /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: $box    /* Firefox, other Gecko */
+    box-sizing: $box         /* Opera/IE 8+ */
+=backgroundSize($property)
+    -webkit-background-size: $property
+    -moz-background-size: $property
+    -o-background-size: $property
+    background-size: $property
