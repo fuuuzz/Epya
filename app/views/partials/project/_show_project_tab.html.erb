@@ -4,7 +4,7 @@
 	
 	<p>
 		<% if @project.photo.url %>
-		  <img src="/uploads/images/projects/<%= @project.photo %>" widht='200' height='175'>
+		  <img src="<%= @project.photo.url %>" widht='200' height='175'>
 		<% end %>
 	</p>
 	
