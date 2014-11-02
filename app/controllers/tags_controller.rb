@@ -80,6 +80,23 @@ class TagsController < ApplicationController
     end
   end
 
+
+  # SEARCH
+  def search
+    @resultTag = Array.new
+    @tagSearch = Tag.find_by(name: params[:searchTag])
+    if @tagSearch.nil?
+    else
+      @projects_tag = ProjectTag.where(tag_id: @tagSearch_id)
+      if @projects_tag.any?
+        @projects_tag.each do |project_tag|
+          @resultTag.push(Project.find_by_id(project_tag.project_id))
+        end
+      end
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
@@ -90,4 +107,6 @@ class TagsController < ApplicationController
     def tag_params
       params.require(:tag).permit(:name)
     end
+
+
 end

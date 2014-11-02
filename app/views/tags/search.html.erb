@@ -1,0 +1,10 @@
+<h1 class="page-header">
+	All projects with <%= link_to(@tagSearch.name,@tagSearch) %> tag
+</h1>
+	
+<% if @resultTag.any? %>
+	<% @resultTag.each do |project| %>
+		<h2><%= link_to(project.name,project) %></h2>
+		<hr>
+	<% end %>
+<% end %>

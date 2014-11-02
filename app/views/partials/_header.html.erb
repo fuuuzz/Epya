@@ -5,6 +5,15 @@
   <h1><a href="/">Epya</a></h1>
   <nav>
     <ul>
+      <li>
+        <%= form_tag(:controller => 'tags',  :action => 'search')  do %>
+          <%= text_field_tag(:searchTag) %>
+          <%= submit_tag("Search") %>
+        <% end %>
+      </li>
+      
+      
+
       <li><a href="/projects">Projects</a></li>
       <li><a href="/idea">About</a></li>
 

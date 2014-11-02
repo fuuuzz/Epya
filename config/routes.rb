@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   get 'team' => 'welcome#team'
   get 'idea' => 'welcome#idea'
   get 'terms-of-use' => 'welcome#terms'
+  post 'search' => 'tags#search'
 
 end

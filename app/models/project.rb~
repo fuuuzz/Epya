@@ -18,10 +18,10 @@ class Project < ActiveRecord::Base
 	# @param File file, the file submited
 	# @return String name, the file name to save in database
 	def self.imgupload(file)
-	name = file.original_filename
-	File.open(Rails.root.join('public', 'uploads', 'images', 'projects', file.original_filename), 'wb') do |f|
-	f.write(file.read)
-	end
+    name = file.original_filename
+    File.open(Rails.root.join('public', 'uploads', 'images', 'projects', file.original_filename), 'wb') do |f|
+      f.write(file.read)
+    end
     return name
   end
 end
