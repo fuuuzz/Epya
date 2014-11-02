@@ -4,14 +4,23 @@ development:
   pool: 5
   timeout: 5000
   port: 5432
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 59ae034cb7f10f42bd59746faba30188ee7684a0
 test:
   adapter: postgresql
   database: epya_test
   pool: 5
   timeout: 5000
   port: 5432
+<<<<<<< HEAD
   
+=======
+  password: arthurPostgresql
+
+>>>>>>> 59ae034cb7f10f42bd59746faba30188ee7684a0
 production:
   adapter: postgresql
   pool: 5

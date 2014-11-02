@@ -1,6 +1,6 @@
 <section class="intro">
     <h1>We help projects</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum repellendus, ipsa, tempora praesentium corporis qui ex animi fuga possimus tempore quidem? Ratione eveniet, quaerat, animi adipisci tenetur officiis suscipit maiores!</p>
+    <p><span class="base-color"><strong>Epya</strong></span> is a student project made by an <a href="/team">awesome team</a>. It helps people with great idea to show their works to a amazing public (aka you). With Epya, you can discover new projects build by people, follow them, and participate.</p>
     <a href="/idea">Check what we do <span class="glyphicon glyphicon-hand-right"></span></a>
 </section>
 
@@ -32,15 +32,15 @@
 <section class="score col-md-10 col-md-offset-1 col-xs-12">
     <h1>What we achieved</h1>
     <div class="col-md-6 achievement">
-        <span class="number">1324</span> projects
+        <span class="number"><%= @project_number %></span> projects
     </div>
     <div class="col-md-6 achievement">
-        <span class="number">13 521</span> members
+        <span class="number"><%= @user_number %></span> members
     </div>
     <div class="col-md-6 achievement">
-        <span class="number">714</span> workshops
+        <span class="number"><%= @collaborator_number %></span> collaborators
     </div>
     <div class="col-md-6 achievement">
-        <span class="number">985</span> likes. 
+        <span class="number"><%= @follower_number %></span> followers
     </div>
 </section>

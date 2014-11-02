@@ -6,7 +6,7 @@
   <nav>
   	<ul>
   	<li>
-    <%= form_tag({:controller => 'tags',  :action => 'search'})  do %>
+    <%= form_tag(:controller => 'tags',  :action => 'search')  do %>
           <%= text_field_tag(:searchTag, nil) %>
           <%= submit_tag("Search", :class => 'btn btn-default') %>
     <% end %>

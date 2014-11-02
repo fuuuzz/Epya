@@ -19,7 +19,8 @@ html, body
         bottom: 0
         width: 100%
         height: 288px
-
+p
+    font-size: 16px
 footer
     display: block
     margin-top: 100px
@@ -83,6 +84,33 @@ footer
             font-size: 16px
             text-transform: uppercase
             color: #b0b0b0
+            form
+                height: 95%
+                vertical-align: middle
+                input
+                    height: 40px
+                input[type=text]
+                    position: relative
+                    border: none
+                    padding-left: 10px
+                    color: $colorBaseLight
+                    +placeholder(#d3d3d3)
+                    +transition(all, 400ms, $easeInQuad)
+                    &:focus
+                        outline: none
+                        border: none
+                input[type=submit]
+                    border-radius: 0
+                    border: none
+                    position: relative
+                    top: -1px
+                    color: $colorBase
+                    text-transform: uppercase
+                    font-size: 16px
+                    +transition(all, 400ms, $easeInQuad)
+                    &:hover
+                        color: white
+                        background: $colorBaseLight
             a
                 color: white
                 &:hover
