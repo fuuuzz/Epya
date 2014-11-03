@@ -8,19 +8,19 @@
   	<li>
     <%= form_tag(search_path)  do %>
           <%= text_field_tag(:searchTag, nil) %>
-          <%= submit_tag("Search", :class => 'btn btn-default') %>
+          <%= submit_tag("Recherche", :class => 'btn btn-default') %>
     <% end %>
     </li>
-      <li><a href="/projects">Projects</a></li>
-      <li><a href="/idea">About</a></li>
+      <li><a href="/projects">Projets</a></li>
+      <li><a href="/idea">A propos</a></li>
       <% if user_signed_in? %>
         <li>
           <%= link_to(current_user.name, user_path(:id => current_user.id)) %>
         </li>
-        <li><%= link_to 'New Project', new_project_path %></li>
-        <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+        <li><%= link_to 'Nouveau Projet', new_project_path %></li>
+        <li><%= link_to('Déconnexion', destroy_user_session_path, :method => :delete) %></li>
       <% else %>
-        <li><%= link_to('Login', user_session_path)  %></li>
+        <li><%= link_to('Connexion', user_session_path)  %></li>
       <% end %>
     </ul>
   </nav>

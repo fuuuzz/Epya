@@ -1,12 +1,12 @@
 <section class="intro">
-    <h1>We help projects</h1>
-    <p><span class="base-color"><strong>Epya</strong></span> is a student project made by an <a href="/team">awesome team</a>. It helps people with great idea to show their works to a amazing public (aka you). With Epya, you can discover new projects build by people, follow them, and participate.</p>
-    <a href="/idea">Check what we do <span class="glyphicon glyphicon-hand-right"></span></a>
+    <h1>On aide les projets</h1>
+    <p><span class="base-color"><strong>Epya</strong></span> est un projet étudiant réalisé par une <a href="/team">équipe fabuleuse</a>. Epya vous aide à promouvoir vos projets réalisés à l'UCP en rapport avec le web. <a href="/users/sign_up">Inscrivez vous</a>, créer votre projet, participez, collaborez. </p>
+    <a href="/idea">Ce que nous faisons <span class="glyphicon glyphicon-hand-right"></span></a>
 </section>
 
 </div>
 <section class="project-list col-md-10 col-md-offset-1 col-xs-12">
-        <h1>Popular</h1> 
+        <h1>Projets populaires</h1> 
     <% @best_projects.each do |best_project| %>
       <article class="col-md-4 item" style="background-image: url(<%= best_project.photo.url %>);">
             <div class="color-overlay"></div>
@@ -27,20 +27,21 @@
         </div>
     </article>
     <% end %>
-        <a href="/projects">Discover all projects</a>
+        <a href="/projects">Découvrez les autres projets</a>
 </section>
 <section class="score col-md-10 col-md-offset-1 col-xs-12">
-    <h1>What we achieved</h1>
+    <h1>Accomplissements</h1>
+    <p>Grâce à vous, voici ce qu'Epya a accompli:</p>
     <div class="col-md-6 achievement">
-        <span class="number"><%= @project_number %></span> projects
+        <span class="number"><%= @project_number %></span> projets
     </div>
     <div class="col-md-6 achievement">
-        <span class="number"><%= @user_number %></span> members
+        <span class="number"><%= @user_number %></span> membres
     </div>
     <div class="col-md-6 achievement">
-        <span class="number"><%= @collaborator_number %></span> collaborators
+        <span class="number"><%= @collaborator_number %></span> collaborateurs
     </div>
     <div class="col-md-6 achievement">
-        <span class="number"><%= @follower_number %></span> followers
+        <span class="number"><%= @follower_number %></span> abonnés
     </div>
 </section>
