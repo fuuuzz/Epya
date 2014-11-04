@@ -86,6 +86,8 @@ class TagsController < ApplicationController
     @resultTag = Array.new
     @tagSearch = Tag.find_by(name: params[:searchTag])
     if @tagSearch.nil?
+      @tagSearch = Tag.new
+      @tagSearch.name = params[:searchTag]
     else
       @projects_tag = ProjectTag.where(tag_id: @tagSearch.id)
       if @projects_tag.any?

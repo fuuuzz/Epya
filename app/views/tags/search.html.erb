@@ -1,5 +1,9 @@
 <h1 class="page-header">
-	All projects with <%= link_to(@tagSearch.name,@tagSearch) %> tag
+	<% if @resultTag.count == 0 %>
+		Pas de projet avec le tag <%= link_to(@tagSearch.name,@tagSearch) %>
+	<% else %>	
+		Tous les projets avec le tag <%= link_to(@tagSearch.name,@tagSearch) %>
+	<% end %>
 </h1>
 	
 <% if @resultTag.count() > 0 %>
